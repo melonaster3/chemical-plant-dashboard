@@ -98,9 +98,25 @@ export const dummyDatasets = [
       level2_chemical: 59.2,
  
     },
-  ];
+  ]; 
+  
+  export const GraphTypes = [
+    {label : "Bar Graphs", value : "Bar"},
+    {label : "Line Graphs", value : "Line"},
+  ]
   
   export const BarGraphType = [
+    {label : "Temperature vs. Time", value : "Temperature"},
+    {label : "Temperature Average vs. Time", value : "TemperatureAVG"},
+    {label : "Pressure vs. Time", value : "Pressure"},
+    {label : "Pressure Average vs. Time", value : "PressureAVG"},
+    {label : "Level 1 vs. Time", value : "Level1"},
+    {label : "Level 2 vs. Time", value : "Level2"},
+    {label : "Chemical Level vs. Time", value : "Level"},
+    {label : "All Data vs. Time", value : "All"},
+  ]
+ 
+  export const LineGraphTypes = [
     {label : "Temperature vs. Time", value : "Temperature"},
     {label : "Temperature Average vs. Time", value : "TemperatureAVG"},
     {label : "Pressure vs. Time", value : "Pressure"},

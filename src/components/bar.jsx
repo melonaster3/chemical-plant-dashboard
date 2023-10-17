@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -6,32 +7,28 @@ import {
   Title,
   Tooltip,
   Legend,
-  PointElement,
-  LineElement,
 } from "chart.js";
+import { Bar } from "react-chartjs-2";
 import { dummyDatasets } from "../services/dummy";
-
-import { Bar, Line } from "react-chartjs-2";
-import React, { useEffect, useRef, useState } from "react";
-import { GetGraphSettingsLine } from "../services/LineGraph/lineType";
+import { timestampToReadableDate } from "../services/time";
+import { GetGraphSettings } from "../services/BarGraph/BarType";
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend
 );
 
-export default function LineGraph(props) {
-  const lineType = props.type;
+export function BarGraph(props) {
+  const barType = props.type;
   const [options, setOptions] = useState({});
   const [labels, setLabels] = useState([]);
   const [chartData, setChartData] = useState({});
 
   useEffect(() => {
-    const GraphSettings = GetGraphSettingsLine(lineType, dummyDatasets);
+    const GraphSettings = GetGraphSettings(barType, dummyDatasets);
     if (GraphSettings) {
       setOptions(GraphSettings.options);
       setLabels(GraphSettings.labels);
@@ -39,7 +36,7 @@ export default function LineGraph(props) {
       setChartData(GraphSettings.chartData);
     }
     setChartData(GraphSettings.chartData);
-  }, [lineType]);
+  }, [barType]);
 
   return (
     <>
@@ -48,7 +45,7 @@ export default function LineGraph(props) {
       chartData &&
       Object.keys(chartData).length > 0 &&
       chartData.datasets.length > 0 ? (
-        <Line redraw={true} options={options} data={chartData} />
+        <Bar redraw={true} options={options} data={chartData} />
       ) : (
         <></>
       )}
