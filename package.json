@@ -1,0 +1,25 @@
+{
+  "name": "chemical-plant-dashboard",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "server/app.js",
+  "scripts": {
+    "start:client": "cd client && npm start",
+    "start:server": "cd server && node server.js",
+    "start:dev": "concurrently \"npm run start:client\" \"npm run start:server\"",
+    "build:client": "cd client && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melonaster3/chemical-plant-dashboard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/melonaster3/chemical-plant-dashboard/issues"
+  },
+  "homepage": "https://github.com/melonaster3/chemical-plant-dashboard#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.1"
+  }
+}
