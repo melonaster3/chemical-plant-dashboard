@@ -31,11 +31,10 @@ export default function LineGraph(props) {
   const [chartData, setChartData] = useState({});
 
   useEffect(() => {
-    const GraphSettings = GetGraphSettingsLine(lineType, dummyDatasets);
+    const GraphSettings = GetGraphSettingsLine(lineType, props.data);
     if (GraphSettings) {
       setOptions(GraphSettings.options);
       setLabels(GraphSettings.labels);
-      setChartData({});
       setChartData(GraphSettings.chartData);
     }
     setChartData(GraphSettings.chartData);
