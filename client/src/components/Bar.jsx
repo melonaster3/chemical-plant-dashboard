@@ -28,11 +28,10 @@ export function BarGraph(props) {
   const [chartData, setChartData] = useState({});
 
   useEffect(() => {
-    const GraphSettings = GetGraphSettings(barType, dummyDatasets);
+    const GraphSettings = GetGraphSettings(barType, props.data);
     if (GraphSettings) {
       setOptions(GraphSettings.options);
       setLabels(GraphSettings.labels);
-      setChartData({});
       setChartData(GraphSettings.chartData);
     }
     setChartData(GraphSettings.chartData);

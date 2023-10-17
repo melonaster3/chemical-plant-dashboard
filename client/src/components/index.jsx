@@ -14,10 +14,40 @@ import React, { useEffect, useRef, useState } from "react";
 import LineGraph from "./Line";
 import { BarGraphType, GraphTypes, LineGraphTypes } from "../services/dummy";
 import { BarGraph } from "./Bar";
+import { GetData } from "../services/APICall";
+
 export default function Graph() {
   const [graphType, setGraphType] = useState("");
   const [barType, setBarType] = useState("");
   const [lineType, setLineType] = useState("");
+  const [fullData, setFullData] = useState([]);
+  const [updateData, setUpdateData] = useState(false);
+  const [buttonPressed, setButtonPressed] = useState(false);
+
+  const handleButtonClick = () => {
+    setButtonPressed(true);
+  };
+
+  useEffect(() => {
+    const fetchData = () => {
+      GetData().then((data) => {
+        const sorted = data.data.sort((a, b) => {
+          const timestampA = new Date(a.timestamp);
+          const timestampB = new Date(b.timestamp);
+          return timestampA - timestampB;
+        });
+        setFullData(sorted);
+        setButtonPressed(false);
+      });
+    };
+    fetchData();
+    const dataFetchInterval = setInterval(() => {
+      fetchData();
+    }, 30000); // 30 seconds
+    return () => {
+      clearInterval(dataFetchInterval);
+    };
+  }, []);
 
   return (
     <>
@@ -35,7 +65,8 @@ export default function Graph() {
         ))}
       </select>
       <br />
-
+      <button onClick={handleButtonClick}>Fetch Data Now</button>
+      <br />
       {graphType === "Line" && (
         <>
           <select
@@ -51,7 +82,7 @@ export default function Graph() {
               </option>
             ))}
           </select>
-          {lineType && <LineGraph type={lineType} />}
+          {lineType && <LineGraph type={lineType} data={fullData} />}
         </>
       )}
 
@@ -70,7 +101,7 @@ export default function Graph() {
               </option>
             ))}
           </select>
-          {barType && <BarGraph type={barType} />}
+          {barType && <BarGraph type={barType} data={fullData} />}
         </>
       )}
     </>

@@ -5,17 +5,13 @@
       pressure: 1019.8,
       level1_chemical: 74.2,
       level2_chemical: 59.8,
-
-     
-    },
+     },
     {
       timestamp: "2023-10-13T00:05:00Z",
       temperature: 24.7,
       pressure: 1020.0,
       level1_chemical: 74.5,
       level2_chemical: 60.0,
-
-   
     },
     {
       timestamp: "2023-10-13T00:10:00Z",
@@ -23,7 +19,6 @@
       pressure: 1020.2,
       level1_chemical: 74.7,
       level2_chemical: 60.2,
- 
     },
     {
       timestamp: "2023-10-13T00:15:00Z",
@@ -31,7 +26,6 @@
       pressure: 1010.2,
       level1_chemical: 75,
       level2_chemical: 62.2,
- 
     },
     {
       timestamp: "2023-10-13T00:20:00Z",
@@ -39,7 +33,6 @@
       pressure: 1000.2,
       level1_chemical: 74.0,
       level2_chemical: 60.7,
- 
     },
     {
       timestamp: "2023-10-13T00:25:00Z",
@@ -47,7 +40,6 @@
       pressure: 1020.2,
       level1_chemical: 74.9,
       level2_chemical: 59.2,
- 
     },
     {
       timestamp: "2023-10-13T00:30:00Z",
@@ -55,7 +47,6 @@
       pressure: 1025.2,
       level1_chemical: 75.7,
       level2_chemical: 54.2,
- 
     },
     {
       timestamp: "2023-10-13T00:35:00Z",
