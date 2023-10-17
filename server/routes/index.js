@@ -1,13 +1,26 @@
+// routes/index.js
 const express = require('express');
 const router = express.Router();
+const { Pool } = require('pg');
 
-// Define a route to get a list of items
-router.get('/api/items', (req, res) => {
-  // Replace this with logic to fetch items from a database or another source
-  const items = ['Item 1', 'Item 2', 'Item 3'];
-  res.json(items);
+// Database configuration for the routes file
+const pool = new Pool({
+  user: 'labber',
+  host: 'localhost',
+  database: 'mydb',
+  password: 'labber',
+  port: 5432,
 });
 
-// Add more routes as needed
+router.get('/data', async (req, res) => {
+  try {
+    const query = 'SELECT * FROM sensor_data'; // Replace with your actual table name
+    const result = await pool.query(query);
+    res.status(200).json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while fetching data' });
+  }
+});
 
-module.exports = router;
+module.exports = router; // Export the router
