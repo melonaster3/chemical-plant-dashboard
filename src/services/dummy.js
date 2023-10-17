@@ -85,7 +85,7 @@ export const dummyDatasets = [
     {
       timestamp: "2023-10-13T00:50:00Z",
       temperature: 22.8,
-      pressure: 10212,
+      pressure: 1021.2,
       level1_chemical: 71.7,
       level2_chemical: 60.1,
  
@@ -100,3 +100,13 @@ export const dummyDatasets = [
     },
   ];
   
+  export const BarGraphType = [
+    {label : "Temperature vs. Time", value : "Temperature"},
+    {label : "Temperature Average vs. Time", value : "TemperatureAVG"},
+    {label : "Pressure vs. Time", value : "Pressure"},
+    {label : "Pressure Average vs. Time", value : "PressureAVG"},
+    {label : "Level 1 vs. Time", value : "Level1"},
+    {label : "Level 2 vs. Time", value : "Level2"},
+    {label : "Chemical Level vs. Time", value : "Level"},
+    {label : "All Data vs. Time", value : "All"},
+  ]
