@@ -4,12 +4,16 @@ const app = express();
 const port = process.env.PORT || 3001;
 const { Pool } = require('pg');
 const { pool, createUserTable } = require('./db/database');
+const cors = require('cors'); // Import the cors package
 
 app.use(express.json());
+app.use(cors());
+/* const corsOptions = {
+  origin: 'http://localhost:3000',
+};
 
-
-
-
+app.use(cors(corsOptions));
+ */
 // Create tables
  createUserTable()
   .then(() => {
