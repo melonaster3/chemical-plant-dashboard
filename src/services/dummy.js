@@ -112,7 +112,7 @@ export const dummyDatasets = [
     {label : "Pressure Average vs. Time", value : "PressureAVG"},
     {label : "Level 1 vs. Time", value : "Level1"},
     {label : "Level 2 vs. Time", value : "Level2"},
-    {label : "Chemical Level vs. Time", value : "Level"},
+    {label : "Chemical Levels vs. Time", value : "Level"},
     {label : "All Data vs. Time", value : "All"},
   ]
  
@@ -123,6 +123,7 @@ export const dummyDatasets = [
     {label : "Pressure Average vs. Time", value : "PressureAVG"},
     {label : "Level 1 vs. Time", value : "Level1"},
     {label : "Level 2 vs. Time", value : "Level2"},
-    {label : "Chemical Level vs. Time", value : "Level"},
+    {label : "Combined Chemical Levels vs. Time", value : "LevelCombined"},
+    {label : "Chemical Levels vs. Time", value : "Level"},
     {label : "All Data vs. Time", value : "All"},
   ]

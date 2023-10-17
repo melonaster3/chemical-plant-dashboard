@@ -51,7 +51,7 @@ export default function Graph() {
               </option>
             ))}
           </select>
-          <LineGraph type={lineType} />
+          {lineType && <LineGraph type={lineType} />}
         </>
       )}
 

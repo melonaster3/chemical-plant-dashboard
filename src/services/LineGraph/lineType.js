@@ -24,7 +24,8 @@ export function GetGraphSettingsLine(type, plotData) {
             type === "Level1" ||
             type === "Level2" ||
             type === "Level" ||
-            type === "LevelAVG"
+            type === "LevelAVG"||
+            type === "LevelCombined"
           ) {
             return `${item.yLabel} L`;
           } else if (
@@ -51,7 +52,8 @@ export function GetGraphSettingsLine(type, plotData) {
               type === "Level1" ||
               type === "Level2" ||
               type === "Level" ||
-              type === "LevelAVG"
+              type === "LevelAVG" ||
+              type === "LevelCombined"
             ) {
               return value + " L";
             } else if (
@@ -69,8 +71,83 @@ export function GetGraphSettingsLine(type, plotData) {
   });
 
   let datasets = [];
-
- 
+  if(type === "Level") {
+    datasets = [
+      {
+        label: "Dataset 1",
+        data: plotData.map((data2) => {
+        
+            return data2.level1_chemical;
+          }),
+        
+        backgroundColor: "rgba(255, 99, 132, 0.5",
+      },
+      {
+        label: "Dataset 1",
+        data: plotData.map((data2) => {
+        
+            return data2.level2_chemical;
+          }),
+        
+          backgroundColor: "rgba(54, 162, 235, 0.5)",      },
+    ];
+  } else if(type === "LevelCombined") {
+    datasets = [
+      {
+        label: "Dataset 1",
+        data: plotData.map((data2) => {
+            return Number(data2.level1_chemical) + Number(data2.level2_chemical) ;
+          }),
+        backgroundColor: "rgba(255, 99, 132, 0.5",
+      },
+      
+    ];
+  }
+  else if (type === "All") {
+    datasets = [
+      {
+        label: "Temperature",
+        data: plotData.map((data2) => {
+          return data2.temperature
+        }
+        ),
+        backgroundColor: "rgba(255, 99, 132, 0.5",
+      },
+      {
+        label: "Pressure",
+        data: plotData.map((data2) => {
+          return data2.pressure
+        }
+        ),
+        backgroundColor: "rgba(155, 20, 32, 0.5",
+      },
+      {
+        label: "Chemical1 Level",
+        data: plotData.map((data2) => {
+          return data2.level1_chemical
+        }
+        ),
+        backgroundColor: "rgba(5, 120, 99, 0.5",
+      },
+      {
+        label: "Chemical2 Level",
+        data: plotData.map((data2) => {
+          return data2.level2_chemical
+        }
+        ),
+        backgroundColor: "rgba(150, 0, 200, 0.5",
+      },
+      {
+        label: "Combined Level",
+        data: plotData.map((data2) => {
+          return Number(data2.level1_chemical) + Number(data2.level2_chemical) ;
+        }
+        ),
+        backgroundColor: "rgba(150, 29, 2, 0.5",
+      },
+    ];
+  }
+  else {
     datasets = [
       {
         label: "Dataset 1",
@@ -89,6 +166,8 @@ export function GetGraphSettingsLine(type, plotData) {
       },
     ];
   
+  }
+   
 
   const chartData = {
     labels,
