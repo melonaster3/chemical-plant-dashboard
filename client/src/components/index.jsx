@@ -26,8 +26,11 @@ export default function Graph() {
   const [barType, setBarType] = useState("");
   const [lineType, setLineType] = useState("");
   const [fullData, setFullData] = useState([]);
+  const [showingData, setShowingData] = useState([]);
   const [timeFrame, setTimeFrame] = useState("Weekly");
   const [buttonPressed, setButtonPressed] = useState(false);
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
 
   const handleButtonClick = () => {
     setButtonPressed(true);
@@ -41,6 +44,7 @@ export default function Graph() {
           const timestampB = new Date(b.timestamp);
           return timestampA - timestampB;
         });
+        setShowingData(sorted);
         setFullData(sorted);
         setButtonPressed(false);
       });
@@ -53,6 +57,24 @@ export default function Graph() {
       clearInterval(dataFetchInterval);
     };
   }, []);
+
+  useEffect(() => {
+    if (fullData.length > 0) {
+      const startTimeMillis = Date.parse(startTime); // Convert startTime to milliseconds
+      const endTimeMillis = Date.parse(endTime); // Convert endTime to milliseconds
+
+      const timeFrameData = fullData.filter((data) => {
+        const dataTimestampMillis = Date.parse(data.timestamp); // Convert data timestamp to milliseconds
+        return (
+          startTimeMillis < dataTimestampMillis &&
+          dataTimestampMillis < endTimeMillis
+        );
+      });
+
+      setShowingData(timeFrameData);
+    }
+    console.log(showingData);
+  }, [endTime, startTime]);
 
   return (
     <>
@@ -87,6 +109,23 @@ export default function Graph() {
         ))}
       </select>
       <br />
+      <input
+        type="datetime-local"
+        id="StartTime"
+        onChange={(e) => {
+          setStartTime(e.target.value);
+        }}
+        max={endTime}
+      />
+      <input
+        type="datetime-local"
+        id="EndTime"
+        min={startTime}
+        onChange={(e) => {
+          setEndTime(e.target.value);
+        }}
+      />
+      <br />
       {graphType === "Line" && (
         <>
           <select
@@ -103,7 +142,11 @@ export default function Graph() {
             ))}
           </select>
           {lineType && (
-            <LineGraph type={lineType} data={fullData} timeFrame={timeFrame} />
+            <LineGraph
+              type={lineType}
+              data={showingData}
+              timeFrame={timeFrame}
+            />
           )}
         </>
       )}
@@ -124,7 +167,7 @@ export default function Graph() {
             ))}
           </select>
           {barType && (
-            <BarGraph type={barType} data={fullData} timeFrame={timeFrame} />
+            <BarGraph type={barType} data={showingData} timeFrame={timeFrame} />
           )}
         </>
       )}
