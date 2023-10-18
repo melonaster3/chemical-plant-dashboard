@@ -91,3 +91,10 @@ margin-top : 10vw;
 width : 25vw;
 height : 100%; 
 `
+export const AverageValueTitle = styled ("p")`
+color: rgba(192, 192, 192, 0.9);
+`
+export const AverageValueInfo = styled ("p")`
+color: rgba(192, 192, 192, 0.9);
+
+`

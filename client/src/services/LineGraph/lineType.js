@@ -1,7 +1,6 @@
 import { timestampToReadableDate } from "../Time/time";
 
 export function GetGraphSettingsLine(type, plotData) {
-  console.log(plotData);
   const commonOptions = {
     responsive: true,
     plugins: {
@@ -39,9 +38,15 @@ export function GetGraphSettingsLine(type, plotData) {
     scales: {
     x: {
             stacked: type === "Level" ? true : false
+            , grid: {
+              color: 'rgba(192, 192, 192, 0.3)', 
+            },
           },
       y: {
         stacked: type === "Level" ? true : false,
+        grid: {
+          color: 'rgba(192, 192, 192, 0.3)', 
+        },
         ticks: {
           callback: function (value, index, ticks) {
             if (type === "Temperature" || type === "TemperatureAVG") {
@@ -81,6 +86,7 @@ export function GetGraphSettingsLine(type, plotData) {
           }),
         
         backgroundColor: "rgba(255, 99, 132, 0.5",
+        borderColor: 'rgba(192, 192, 192, 0.3)', 
       },
       {
         label: "Dataset 1",
@@ -89,7 +95,8 @@ export function GetGraphSettingsLine(type, plotData) {
             return data2.level2_chemical;
           }),
         
-          backgroundColor: "rgba(54, 162, 235, 0.5)",      },
+          backgroundColor: "rgba(54, 162, 235, 0.5)",           borderColor: 'rgba(192, 192, 192, 0.3)', 
+        },
     ];
   } else if(type === "LevelCombined") {
     datasets = [
@@ -98,7 +105,8 @@ export function GetGraphSettingsLine(type, plotData) {
         data: plotData.map((data2) => {
             return Number(data2.level1_chemical) + Number(data2.level2_chemical) ;
           }),
-        backgroundColor: "rgba(255, 99, 132, 0.5",
+        backgroundColor: "rgba(255, 99, 132, 0.5",         borderColor: 'rgba(192, 192, 192, 0.3)', 
+
       },
       
     ];
@@ -111,7 +119,8 @@ export function GetGraphSettingsLine(type, plotData) {
           return data2.temperature
         }
         ),
-        backgroundColor: "rgba(255, 99, 132, 0.5",
+        backgroundColor: "rgba(255, 99, 132, 0.5",         borderColor: 'rgba(192, 192, 192, 0.3)', 
+
       },
       {
         label: "Pressure",
@@ -119,7 +128,8 @@ export function GetGraphSettingsLine(type, plotData) {
           return data2.pressure
         }
         ),
-        backgroundColor: "rgba(155, 20, 32, 0.5",
+        backgroundColor: "rgba(155, 20, 32, 0.5",         borderColor: 'rgba(192, 192, 192, 0.3)', 
+
       },
       {
         label: "Chemical1 Level",
@@ -127,7 +137,8 @@ export function GetGraphSettingsLine(type, plotData) {
           return data2.level1_chemical
         }
         ),
-        backgroundColor: "rgba(5, 120, 99, 0.5",
+        backgroundColor: "rgba(5, 120, 99, 0.5",         borderColor: 'rgba(192, 192, 192, 0.3)', 
+
       },
       {
         label: "Chemical2 Level",
@@ -135,7 +146,8 @@ export function GetGraphSettingsLine(type, plotData) {
           return data2.level2_chemical
         }
         ),
-        backgroundColor: "rgba(150, 0, 200, 0.5",
+        backgroundColor: "rgba(150, 0, 200, 0.5",         borderColor: 'rgba(192, 192, 192, 0.3)', 
+
       },
       {
         label: "Combined Level",
@@ -143,7 +155,8 @@ export function GetGraphSettingsLine(type, plotData) {
           return Number(data2.level1_chemical) + Number(data2.level2_chemical) ;
         }
         ),
-        backgroundColor: "rgba(150, 29, 2, 0.5",
+        backgroundColor: "rgba(150, 29, 2, 0.5",         borderColor: 'rgba(192, 192, 192, 0.3)', 
+
       },
     ];
   }
@@ -162,7 +175,8 @@ export function GetGraphSettingsLine(type, plotData) {
             return data2.level2_chemical;
           }
         }),
-        backgroundColor: "rgba(255, 99, 132, 0.5",
+        backgroundColor: "rgba(255, 99, 132, 0.5",        borderColor: 'rgba(192, 192, 192, 0.3)', 
+
       },
     ];
   
