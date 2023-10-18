@@ -1,4 +1,4 @@
-import { timestampToReadableDate } from "../time";
+import { timestampToReadableDate } from "../Time/time";
 
 export function GetGraphSettingsLine(type, plotData) {
   console.log(plotData);

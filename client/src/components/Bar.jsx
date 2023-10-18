@@ -9,8 +9,8 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { dummyDatasets } from "../services/dummy";
-import { timestampToReadableDate } from "../services/time";
+import { dummyDatasets } from "../services/Data/dummy";
+import { getAverage, timestampToReadableDate } from "../services/Time/time";
 import { GetGraphSettings } from "../services/BarGraph/BarType";
 ChartJS.register(
   CategoryScale,
@@ -23,19 +23,21 @@ ChartJS.register(
 
 export function BarGraph(props) {
   const barType = props.type;
+  const timeFrame = props.timeFrame;
   const [options, setOptions] = useState({});
   const [labels, setLabels] = useState([]);
   const [chartData, setChartData] = useState({});
 
   useEffect(() => {
-    const GraphSettings = GetGraphSettings(barType, props.data);
+    const dataAVG = getAverage(props.data, timeFrame);
+    const GraphSettings = GetGraphSettings(barType, dataAVG);
     if (GraphSettings) {
       setOptions(GraphSettings.options);
       setLabels(GraphSettings.labels);
       setChartData(GraphSettings.chartData);
     }
     setChartData(GraphSettings.chartData);
-  }, [barType]);
+  }, [barType, timeFrame]);
 
   return (
     <>

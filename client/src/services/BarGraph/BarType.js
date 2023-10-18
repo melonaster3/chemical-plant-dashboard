@@ -1,4 +1,4 @@
-import { timestampToReadableDate } from "../time";
+import { timestampToReadableDate } from "../Time/time";
 
 export function GetGraphSettings(type, plotData) {
   const commonOptions = {

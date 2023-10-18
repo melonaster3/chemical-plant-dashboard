@@ -12,7 +12,12 @@ import {
 import { Bar, Line } from "react-chartjs-2";
 import React, { useEffect, useRef, useState } from "react";
 import LineGraph from "./Line";
-import { BarGraphType, GraphTypes, LineGraphTypes } from "../services/dummy";
+import {
+  BarGraphType,
+  GraphTypes,
+  LineGraphTypes,
+  timeFrameSelection,
+} from "../services/Data/types";
 import { BarGraph } from "./Bar";
 import { GetData } from "../services/APICall";
 
@@ -21,7 +26,7 @@ export default function Graph() {
   const [barType, setBarType] = useState("");
   const [lineType, setLineType] = useState("");
   const [fullData, setFullData] = useState([]);
-  const [updateData, setUpdateData] = useState(false);
+  const [timeFrame, setTimeFrame] = useState("Weekly");
   const [buttonPressed, setButtonPressed] = useState(false);
 
   const handleButtonClick = () => {
@@ -65,7 +70,22 @@ export default function Graph() {
         ))}
       </select>
       <br />
+
       <button onClick={handleButtonClick}>Fetch Data Now</button>
+      <br />
+      <select
+        name="TimeFrame"
+        onChange={(e) => {
+          setTimeFrame(e.target.value);
+        }}
+      >
+        <option selected="selected"></option>
+        {timeFrameSelection.map(({ value, label }, index) => (
+          <option key={index} value={value}>
+            {label}
+          </option>
+        ))}
+      </select>
       <br />
       {graphType === "Line" && (
         <>
@@ -82,7 +102,9 @@ export default function Graph() {
               </option>
             ))}
           </select>
-          {lineType && <LineGraph type={lineType} data={fullData} />}
+          {lineType && (
+            <LineGraph type={lineType} data={fullData} timeFrame={timeFrame} />
+          )}
         </>
       )}
 
@@ -101,7 +123,9 @@ export default function Graph() {
               </option>
             ))}
           </select>
-          {barType && <BarGraph type={barType} data={fullData} />}
+          {barType && (
+            <BarGraph type={barType} data={fullData} timeFrame={timeFrame} />
+          )}
         </>
       )}
     </>
