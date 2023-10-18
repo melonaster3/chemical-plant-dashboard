@@ -15,6 +15,7 @@ import { DataType } from "./Data";
 import { GraphType } from "./Graph";
 import { TimeAvg } from "./TimeAvg";
 import { TimeWindow } from "./TimeWindow";
+import { FurtherInfo } from "./FurtherInfo";
 export const TableContent = (props) => {
   return (
     <Grid xs={12} rowSpaing={2} columnSpacing={1} item container>
@@ -27,6 +28,7 @@ export const TableContent = (props) => {
       <GraphType graph={props.graph} setGraph={props.setGraph} />
       <TimeAvg graph={props.graph} setGraph={props.setGraph} />
       <TimeWindow graph={props.graph} setGraph={props.setGraph} />
+      <FurtherInfo graph={props.graph} setGraph={props.setGraph} />
     </Grid>
   );
 };
