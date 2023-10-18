@@ -11,40 +11,66 @@ export function GetGraphSettings(type, plotData) {
         display: true,
         text: "Chart.js Bar Chart",
       },
-    },
-    tooltips: {
-      callbacks: {
-        label: (item) => {
-          if (type === "Temperature" || type === "TemperatureAVG") {
-            return `${item.yLabel} °C`;
-          } else if (type === "Pressure" || type === "PressureAVG") {
-            return `${item.yLabel} kPa`;
-          } else if (
-            type === "Level1" ||
-            type === "Level2" ||
-            type === "Level" ||
-            type === "LevelAVG"
-          ) {
-            return `${item.yLabel} L`;
-          } else if (
-            type === "All"
-          ) {
-            return `${item.yLabel}`;
-          }
+      tooltip: {
+        callbacks: {
+       
+          label: (item) => {
+         
+            if (type === "Temperature") {
+              return `${item.formattedValue} °C`;
+            } else if (type === "Pressure") {
+              return `${item.formattedValue} kPa`;
+            } else if (
+              type === "Level1" ||
+              type === "Level2" ||
+              type === "Level" ||
+              type === "LevelAVG"
+            ) {
+              return `${item.formattedValue} L`;
+            } else if (
+              type === "All"
+            ) {
+              return`${item.formattedValue}`;
+            }
+          },
         },
-      },
     },
+  },
+   
     scales: {
     x: {
-            stacked: type === "Level" ? true : false
+            stacked: type === "Level" ? true : false,
+            title: {
+              display: true,
+              text: `
+            Time
+              `,
+              font: {
+                size: 14,
+                weight: 'bold',
+              },
+            },
           },
       y: {
+        title: {
+          display: true,
+          text: `
+          ${type === "Temperature" ? "Temperature (°C)" : ''}
+          ${type === "Pressure" ? "Pressure (kPa)" : ''}
+          ${type.includes("Level") ? "Level (L)" : ''}
+          ${type === "All" ? "All" : ''}
+          `,
+          font: {
+            size: 14,
+            weight: 'bold',
+          },
+        },
         stacked: type === "Level" ? true : false,
         ticks: {
           callback: function (value, index, ticks) {
-            if (type === "Temperature" || type === "TemperatureAVG") {
+            if (type === "Temperature") {
               return value + " °C";
-            } else if (type === "Pressure" || type === "PressureAVG") {
+            } else if (type === "Pressure" ) {
               return value + " kPa";
             } else if (
               type === "Level1" ||

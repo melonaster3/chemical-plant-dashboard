@@ -37,7 +37,7 @@ export function BarGraph(props) {
       setChartData(GraphSettings.chartData);
     }
     setChartData(GraphSettings.chartData);
-  }, [barType, timeFrame]);
+  }, [barType, timeFrame, props.data]);
 
   return (
     <>
