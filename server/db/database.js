@@ -1,7 +1,7 @@
 
 
 const { Pool } = require('pg');
-const dummyDatasets = require('./dummyData.js'); // Import the data
+const {dummyDatasets, generateData} = require('./dummyData.js'); // Import the data
 
 const pool = new Pool({
   user: 'labber',
@@ -48,8 +48,11 @@ const insertData = async (data) => {
   dummyDatasets.forEach((data) => {
     insertData(data);
   });
+  const simulatedData = generateData();
+  simulatedData.forEach((data) => {
+    insertData(data);
+  });
   
-
   pool.query(createTableQuery, (err, result) => {
     if (err) {
       console.error('Error creating table:', err);
