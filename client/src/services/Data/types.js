@@ -27,5 +27,4 @@ export const GraphTypes = [
     {label : "Daily", value : "Daily"},
     {label : "Weekly", value : "Weekly"},
     {label : "Monthly", value : "Monthly"},
-
   ]

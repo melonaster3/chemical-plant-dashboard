@@ -9,9 +9,9 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { dummyDatasets } from "../services/Data/dummy";
-import { getAverage, timestampToReadableDate } from "../services/Time/time";
-import { GetGraphSettings } from "../services/BarGraph/BarType";
+
+import { GetGraphSettings } from "../../services/BarGraph/BarType";
+import { getAverage } from "../../services/Time/time";
 ChartJS.register(
   CategoryScale,
   LinearScale,
