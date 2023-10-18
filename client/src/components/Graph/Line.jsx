@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -7,36 +6,44 @@ import {
   Title,
   Tooltip,
   Legend,
+  PointElement,
+  LineElement,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
-import { dummyDatasets } from "../services/dummy";
-import { timestampToReadableDate } from "../services/time";
-import { GetGraphSettings } from "../services/BarGraph/BarType";
+import { dummyDatasets } from "../../services/Data/dummy";
+
+import { Bar, Line } from "react-chartjs-2";
+import React, { useEffect, useRef, useState } from "react";
+import { GetGraphSettingsLine } from "../../services/LineGraph/lineType";
+import { getAverage } from "../../services/Time/time";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend
 );
 
-export function BarGraph(props) {
-  const barType = props.type;
+export default function LineGraph(props) {
+  const lineType = props.type;
+  const timeFrame = props.timeFrame;
+
   const [options, setOptions] = useState({});
   const [labels, setLabels] = useState([]);
   const [chartData, setChartData] = useState({});
 
   useEffect(() => {
-    const GraphSettings = GetGraphSettings(barType, dummyDatasets);
+    const dataAVG = getAverage(props.data, timeFrame);
+    const GraphSettings = GetGraphSettingsLine(lineType, dataAVG);
     if (GraphSettings) {
       setOptions(GraphSettings.options);
       setLabels(GraphSettings.labels);
-      setChartData({});
       setChartData(GraphSettings.chartData);
     }
     setChartData(GraphSettings.chartData);
-  }, [barType]);
+  }, [lineType, timeFrame, props.data]);
 
   return (
     <>
@@ -45,7 +52,7 @@ export function BarGraph(props) {
       chartData &&
       Object.keys(chartData).length > 0 &&
       chartData.datasets.length > 0 ? (
-        <Bar redraw={true} options={options} data={chartData} />
+        <Line redraw={true} options={options} data={chartData} />
       ) : (
         <></>
       )}
