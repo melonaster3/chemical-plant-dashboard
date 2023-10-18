@@ -9,11 +9,12 @@ import {
   PointElement,
   LineElement,
 } from "chart.js";
-import { dummyDatasets } from "../services/dummy";
+import { dummyDatasets } from "../services/Data/dummy";
 
 import { Bar, Line } from "react-chartjs-2";
 import React, { useEffect, useRef, useState } from "react";
 import { GetGraphSettingsLine } from "../services/LineGraph/lineType";
+import { getAverage } from "../services/Time/time";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -26,19 +27,23 @@ ChartJS.register(
 
 export default function LineGraph(props) {
   const lineType = props.type;
+  const timeFrame = props.timeFrame;
+
   const [options, setOptions] = useState({});
   const [labels, setLabels] = useState([]);
   const [chartData, setChartData] = useState({});
 
   useEffect(() => {
-    const GraphSettings = GetGraphSettingsLine(lineType, props.data);
+    const dataAVG = getAverage(props.data, timeFrame);
+
+    const GraphSettings = GetGraphSettingsLine(lineType, dataAVG);
     if (GraphSettings) {
       setOptions(GraphSettings.options);
       setLabels(GraphSettings.labels);
       setChartData(GraphSettings.chartData);
     }
     setChartData(GraphSettings.chartData);
-  }, [lineType]);
+  }, [lineType, timeFrame]);
 
   return (
     <>
