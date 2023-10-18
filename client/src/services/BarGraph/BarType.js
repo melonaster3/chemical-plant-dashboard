@@ -50,6 +50,9 @@ export function GetGraphSettings(type, plotData) {
                 weight: 'bold',
               },
             },
+            grid: {
+              color: 'rgba(192, 192, 192, 0.3)', 
+            },
           },
       y: {
         title: {
@@ -64,6 +67,9 @@ export function GetGraphSettings(type, plotData) {
             size: 14,
             weight: 'bold',
           },
+        },
+        grid: {
+          color: 'rgba(192, 192, 192, 0.3)', 
         },
         stacked: type === "Level" ? true : false,
         ticks: {
@@ -94,7 +100,6 @@ export function GetGraphSettings(type, plotData) {
   });
 
   let datasets = [];
-
   if (type === "Level") {
     // For "Level" type, create two datasets for Level1 and Level2
     datasets = [

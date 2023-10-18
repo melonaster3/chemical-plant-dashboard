@@ -29,14 +29,17 @@ export function BarGraph(props) {
   const [chartData, setChartData] = useState({});
 
   useEffect(() => {
-    const dataAVG = getAverage(props.data, timeFrame);
-    const GraphSettings = GetGraphSettings(barType, dataAVG);
-    if (GraphSettings) {
-      setOptions(GraphSettings.options);
-      setLabels(GraphSettings.labels);
+    console.log(props.data, timeFrame, barType);
+    if (props.data && timeFrame && barType) {
+      const dataAVG = getAverage(props.data, timeFrame);
+      const GraphSettings = GetGraphSettings(barType, dataAVG);
+      if (GraphSettings) {
+        setOptions(GraphSettings.options);
+        setLabels(GraphSettings.labels);
+        setChartData(GraphSettings.chartData);
+      }
       setChartData(GraphSettings.chartData);
     }
-    setChartData(GraphSettings.chartData);
   }, [barType, timeFrame, props.data]);
 
   return (

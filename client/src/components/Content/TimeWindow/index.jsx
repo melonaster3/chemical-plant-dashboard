@@ -1,4 +1,4 @@
-import { Grid, Input } from "@mui/material";
+import { Grid, Input, TextField } from "@mui/material";
 import { TimeButton } from "../../style/style";
 
 export const TimeWindow = (props) => {
@@ -26,6 +26,11 @@ export const TimeWindow = (props) => {
             id="StartTime"
             type="datetime-local"
             inputProps={{
+              style: {
+                color: "rgba(192, 192, 192, 0.9)",
+                borderColor: "white",
+              }, // Set the font color to white
+
               max: graph.timeEnd ? graph.timeEnd : "",
             }}
           ></Input>
@@ -42,6 +47,11 @@ export const TimeWindow = (props) => {
             id="EndTime"
             type="datetime-local"
             inputProps={{
+              style: {
+                color: "rgba(192, 192, 192, 0.9)",
+                borderColor: "rgba(192, 192, 192, 0.9)",
+              }, // Set the font color to white
+
               min: graph.timeStart ? graph.timeStart : "", // Replace with your desired minimum date and time
             }}
           ></Input>

@@ -29,6 +29,9 @@ export const FetchAndReset = (props) => {
                 timeFrame: "",
                 timeStart: "",
                 timeEnd: "",
+                avg: "",
+                max: "",
+                min: "",
               })
             }
           >

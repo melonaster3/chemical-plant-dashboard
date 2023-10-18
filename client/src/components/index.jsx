@@ -19,6 +19,9 @@ export default function Graph() {
     timeFrame: "Weekly",
     timeStart: "",
     timeEnd: "",
+    avg: "",
+    max: "",
+    min: "",
   });
 
   const handleButtonClick = () => {
@@ -41,7 +44,7 @@ export default function Graph() {
     fetchData();
     const dataFetchInterval = setInterval(() => {
       fetchData();
-    }, 30000); // 30 seconds
+    }, 60000); // 30 seconds
     return () => {
       clearInterval(dataFetchInterval);
     };
@@ -59,11 +62,9 @@ export default function Graph() {
           dataTimestampMillis < endTimeMillis
         );
       });
-
       setShowingData(timeFrameData);
     }
   }, [graph.timeEnd, graph.timeStart]);
-
   return (
     <>
       <Grid width="100%" justifyContent={"center"} container>
@@ -71,6 +72,7 @@ export default function Graph() {
           <GraphContent
             graph={graph}
             type={graph.type}
+            graphInfo={graph.info}
             data={showingData}
             timeFrame={graph.timeFrame}
           />
