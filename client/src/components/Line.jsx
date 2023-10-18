@@ -35,7 +35,6 @@ export default function LineGraph(props) {
 
   useEffect(() => {
     const dataAVG = getAverage(props.data, timeFrame);
-
     const GraphSettings = GetGraphSettingsLine(lineType, dataAVG);
     if (GraphSettings) {
       setOptions(GraphSettings.options);
@@ -43,7 +42,7 @@ export default function LineGraph(props) {
       setChartData(GraphSettings.chartData);
     }
     setChartData(GraphSettings.chartData);
-  }, [lineType, timeFrame]);
+  }, [lineType, timeFrame, props.data]);
 
   return (
     <>
