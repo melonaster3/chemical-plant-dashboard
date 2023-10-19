@@ -10,8 +10,9 @@ import {
   LineElement,
   TimeScale,
 } from "chart.js";
-import { GetOverallAverage, dummyDatasets } from "../../services/Data/dummy";
 
+import { GetOverallAverage, dummyDatasets } from "../../services/Data/dummy";
+import "chartjs-adapter-date-fns";
 import { Bar, Line } from "react-chartjs-2";
 import React, { useEffect, useRef, useState } from "react";
 import { GetGraphSettingsLine } from "../../services/LineGraph/lineType";
@@ -55,8 +56,8 @@ export default function LineGraph(props) {
       props.setCSVData(dataAVG);
     }
     setChartData(GraphSettings.chartData);
-  }, [lineType, timeFrame, props.data]);
-  props.setCSVData(dataAVG);
+    props.setCSVData(dataAVG);
+  }, [lineType, timeFrame, props.data, graph.timeEnd, graph.timeStart]);
 
   return (
     <>

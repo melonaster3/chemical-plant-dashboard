@@ -28,7 +28,6 @@ export const FurtherInfo = (props) => {
     return parseFloat(value).toFixed(2) + unit;
   };
 
-  const setGraph = props.setGraph;
   return (
     <>
       <Grid

@@ -1,4 +1,6 @@
 import { timestampToReadableDate } from "../Time/time";
+import {de} from 'date-fns/locale';
+import "chartjs-adapter-date-fns";
 
 export function GetGraphSettingsLine(type, plotData) {
   const commonOptions = {
@@ -36,14 +38,17 @@ export function GetGraphSettingsLine(type, plotData) {
       },
     },
     scales: {
+  
     x: {
       offset: true,
-
-            stacked: type === "Level" ? true : false
-            , grid: {
-              color: 'rgba(192, 192, 192, 0.3)', 
-            },
-          },
+      maxTicksLimit: 5,
+      autoSkip: true,   // Allow automatic skipping of ticks
+      autoSkipPadding: 10, // Padding around the ticks
+            stacked: type === "Level" ? true : false,
+      grid: {
+        color: 'rgba(192, 192, 192, 0.3)',
+      },
+    },
       y: {
         stacked: type === "Level" ? true : false,
         grid: {
@@ -168,7 +173,7 @@ export function GetGraphSettingsLine(type, plotData) {
         label: "Dataset 1",
         data: plotData.map((data2) => {
           if (type === "Temperature" || type === "TemperatureAVG") {
-            return data2.temperature;
+            return data2.temperature
           } else if (type === "Pressure" || type === "PressureAVG") {
             return data2.pressure;
           } else if (type === "Level1") {
@@ -191,4 +196,32 @@ export function GetGraphSettingsLine(type, plotData) {
   };
 
   return { options: commonOptions, labels, chartData };
+}
+
+
+export const EmptyGraph = () => {
+  const options = {
+    scales: {
+      x: {
+        type: 'linear',
+        position: 'bottom',
+      },
+      y: {
+        min: 0,
+        max: 100,
+      },
+    },
+  };
+  const data = {
+    labels: [],
+    datasets: [
+      {
+        label: 'Empty Dataset',
+        data: [],
+        borderColor: 'rgba(0, 0, 0, 0)', // Transparent line color
+        backgroundColor: 'rgba(0, 0, 0, 0)', // Transparent fill color
+      },
+    ],
+  };
+  return {data,options}
 }

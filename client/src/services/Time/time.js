@@ -1,3 +1,5 @@
+import { DateTime } from "luxon";
+
 export function timestampToReadableDate(timestamp) {
   // Convert the timestamp (in ISO 8601 format) to a Date object
   const date = new Date(timestamp);
@@ -190,4 +192,40 @@ function calculateAverageForMonth(entries, month, year) {
   averageEntry.label = `${monthNames[month]} ${year}`;
 
   return averageEntry;
+}
+
+
+export function GetTimeRightNow() {
+  const timeZone = "Asia/Seoul"; // Replace with your desired time zone
+  const currentTime = DateTime.now().setZone(timeZone).toISO();
+  const timeRightNow = currentTime.slice(0, 16);
+  return timeRightNow
+}
+
+export function GetTimeOneHourBefore(timestamp) {
+  const timeZone = 'Asia/Seoul'; // Replace with your desired time zone
+  const currentTime = DateTime.fromISO(timestamp).setZone(timeZone);
+  const timeOneHourBefore = currentTime.minus({ hours: 1 }).toISO();
+  return timeOneHourBefore.slice(0, 16);
+}
+export function GetTimeOneDayBefore(timestamp) {
+  const timeZone = 'Asia/Seoul'; // Replace with your desired time zone
+  const currentTime = DateTime.fromISO(timestamp).setZone(timeZone);
+  const timeOneHourBefore = currentTime.minus({ hours: 24 }).toISO();
+  return timeOneHourBefore.slice(0, 16);
+}
+export function GetTimeOneWeekBefore(timestamp) {
+  const timeZone = 'Asia/Seoul'; // Replace with your desired time zone
+  const currentTime = DateTime.fromISO(timestamp).setZone(timeZone);
+  let oneWeekBefore = currentTime.minus({ weeks: 1 }).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).toISO();
+oneWeekBefore=oneWeekBefore.slice(0,16) 
+  return oneWeekBefore;
+}
+export function GetTimeOneMonthBefore() {
+  const timeZone = 'Asia/Seoul'; // Replace with your desired time zone
+  const currentTime = DateTime.now().setZone(timeZone);
+  let oneMonthBefore = currentTime.set({ day: 1, hour: 0, minute: 0, second: 0, millisecond: 0 }).toISO();
+  oneMonthBefore=oneMonthBefore.slice(0,16) 
+
+  return oneMonthBefore;
 }

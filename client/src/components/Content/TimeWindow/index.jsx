@@ -1,9 +1,47 @@
 import { Grid, Input, TextField } from "@mui/material";
-import { TimeButton, TimeInfo } from "../../style/style";
-
+import { LastButton, TimeButton, TimeInfo } from "../../style/style";
+import {
+  GetTimeOneDayBefore,
+  GetTimeOneHourBefore,
+  GetTimeOneMonthBefore,
+  GetTimeOneWeekBefore,
+  GetTimeRightNow,
+} from "../../../services/Time/time";
 export const TimeWindow = (props) => {
   const graph = props.graph;
   const setGraph = props.setGraph;
+
+  const timeRightNow = GetTimeRightNow();
+
+  const onClickGraph = (type) => {
+    const timeNow = GetTimeRightNow();
+    if (type === "Hour") {
+      setGraph({
+        ...graph,
+        timeEnd: timeNow,
+        timeStart: GetTimeOneHourBefore(timeNow),
+      });
+    } else if (type === "Day") {
+      setGraph({
+        ...graph,
+        timeEnd: timeNow,
+        timeStart: GetTimeOneDayBefore(timeNow),
+      });
+    } else if (type === "Week") {
+      setGraph({
+        ...graph,
+        timeEnd: timeNow,
+        timeStart: GetTimeOneWeekBefore(timeNow),
+      });
+    } else if (type === "Month") {
+      setGraph({
+        ...graph,
+        timeEnd: timeNow,
+        timeStart: GetTimeOneMonthBefore(timeNow),
+      });
+    }
+  };
+
   return (
     <>
       <Grid
@@ -26,6 +64,8 @@ export const TimeWindow = (props) => {
             }}
             id="StartTime"
             type="datetime-local"
+            defaultValue={graph.timeStart}
+            value={graph.timeStart}
             inputProps={{
               style: {
                 color: "rgba(192, 192, 192, 0.9)",
@@ -41,6 +81,8 @@ export const TimeWindow = (props) => {
 
           <Input
             fullWidth
+            defaultValue={timeRightNow}
+            value={graph.timeEnd}
             onChange={(e) => {
               setGraph({
                 ...graph, // Spread the current state
@@ -58,6 +100,28 @@ export const TimeWindow = (props) => {
               min: graph.timeStart ? graph.timeStart : "", // Replace with your desired minimum date and time
             }}
           ></Input>
+        </Grid>
+        <Grid marginTop={"2rem"} xs={12} item container>
+          <Grid xs={3} item container>
+            <LastButton onClick={() => onClickGraph("Hour")}>
+              Last Hour
+            </LastButton>
+          </Grid>
+          <Grid xs={3} item container>
+            <LastButton onClick={() => onClickGraph("Day")}>
+              Last Day
+            </LastButton>
+          </Grid>
+          <Grid xs={3} item container>
+            <LastButton onClick={() => onClickGraph("Week")}>
+              Last Week
+            </LastButton>
+          </Grid>
+          <Grid xs={3} item container>
+            <LastButton onClick={() => onClickGraph("Month")}>
+              Last Month
+            </LastButton>
+          </Grid>
         </Grid>
       </Grid>{" "}
     </>

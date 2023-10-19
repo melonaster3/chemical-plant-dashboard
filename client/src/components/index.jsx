@@ -6,6 +6,7 @@ import { Button, Grid, Input } from "@mui/material";
 import { TableContent } from "./Content";
 import { GraphContent } from "./Graph/Graph";
 import { GraphDiv, TableContentDiv } from "./style/style";
+import { GetTimeRightNow } from "../services/Time/time";
 
 export default function Graph() {
   const [fullData, setFullData] = useState([]);
@@ -13,12 +14,13 @@ export default function Graph() {
 
   const [buttonPressed, setButtonPressed] = useState(false);
   const [csvData, setCsvData] = useState([]);
+  const TimeRightNow = GetTimeRightNow();
   const [graph, setGraph] = useState({
     type: "",
     info: "",
     timeFrame: "Weekly",
     timeStart: "",
-    timeEnd: "",
+    timeEnd: TimeRightNow,
     avg: "",
     max: "",
     min: "",
@@ -39,6 +41,7 @@ export default function Graph() {
           });
           setShowingData(sorted);
           setFullData(sorted);
+          setGraph({ ...graph, timeStart: sorted[0]["timestamp"] });
           setButtonPressed(false);
         })
         .catch((error) => {
