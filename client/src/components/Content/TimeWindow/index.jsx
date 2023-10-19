@@ -1,5 +1,5 @@
 import { Grid, Input, TextField } from "@mui/material";
-import { TimeButton } from "../../style/style";
+import { TimeButton, TimeInfo } from "../../style/style";
 
 export const TimeWindow = (props) => {
   const graph = props.graph;
@@ -15,6 +15,7 @@ export const TimeWindow = (props) => {
         columnSpacing={4}
       >
         <Grid xs={6} item container>
+          <TimeInfo>Start Time</TimeInfo>
           <Input
             fullWidth
             onChange={(e) => {
@@ -36,6 +37,8 @@ export const TimeWindow = (props) => {
           ></Input>
         </Grid>
         <Grid xs={6} item container>
+          <TimeInfo>End Time</TimeInfo>
+
           <Input
             fullWidth
             onChange={(e) => {

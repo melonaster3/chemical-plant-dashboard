@@ -101,3 +101,54 @@ export const dummyDatasets = [
   ]; 
   
  
+
+  export const GetOverallAverage = (arrayOfData, type) => {
+    let max = 0
+    let min = 0
+    let average = 0
+    let typeKey = ''
+    let unit = ''
+    if(type === "Temperature") {
+      unit = '°C'
+      typeKey = 'temperature'
+    } else if (type === "Pressure") {
+      unit = 'kPa'
+      typeKey = 'pressure'
+
+    } else if (type === "Level") {
+      unit = 'L'
+      typeKey = 'levels'
+    }
+    for(let x = 0; x < arrayOfData.length; x++) {
+      if(typeKey === "levels") {
+        if(x === 0) {
+          min = arrayOfData[x]["level1_chemical"] +arrayOfData[x]["level2_chemical"]
+
+        }
+        if(arrayOfData[x]["level1_chemical"] +arrayOfData[x]["level2_chemical"] > max) {
+          max = arrayOfData[x]["level1_chemical"] +arrayOfData[x]["level2_chemical"]
+        }
+        if(arrayOfData[x]["level1_chemical"] +arrayOfData[x]["level2_chemical"] < min) {
+          min = arrayOfData[x]["level1_chemical"] +arrayOfData[x]["level2_chemical"]
+        }
+    
+        average += arrayOfData[x]["level1_chemical"] +arrayOfData[x]["level2_chemical"] 
+      } else {
+        if(x === 0) {
+          min = arrayOfData[x][typeKey] 
+        }
+        if(arrayOfData[x][typeKey] > max) {
+          max = arrayOfData[x][typeKey]
+        }
+        if(arrayOfData[x][typeKey] < min) {
+          min = arrayOfData[x][typeKey]
+        }
+        average += arrayOfData[x][typeKey]
+      }
+    }    
+    average = average/arrayOfData.length;
+    
+
+   
+    return {max, min, average}
+  }

@@ -14,13 +14,10 @@ export function timestampToReadableDate(timestamp) {
   // Format the date and return it as a readable string
   return date.toLocaleDateString(undefined, options);
 }
-
 export function getAverage(data, frame) {
   if (!data || data.length === 0) {
     return []; // Return an empty array if the data is empty or undefined.
   }
-
-  // Parse the timestamp strings into Date objects for easier date manipulation.
   data = data.map((entry) => ({
     ...entry,
     temperature: parseFloat(entry.temperature),
@@ -31,17 +28,54 @@ export function getAverage(data, frame) {
   }));
   // Calculate the time frame (in milliseconds) based on the user's selection.
   let timeFrame;
+  let labelFormat = "MM/DD/YYYY h:mma";
+  const localeOptions = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
   switch (frame) {
     case "Daily":
       timeFrame = 24 * 60 * 60 * 1000; // 1 day
+      labelFormat = "MM/DD/YYYY"; // Show only the date for daily
       break;
     case "Weekly":
       timeFrame = 7 * 24 * 60 * 60 * 1000; // 7 days
       break;
-    case "Monthly":
-      // This is a simplified calculation for an "average" month. You may need more accurate calculations based on the specific month.
-      timeFrame = 30 * 24 * 60 * 60 * 1000; // 30 days (approximate)
+      case "Monthly":
+        // Create an array to hold the aggregated monthly data
+        let monthlyData = [];
+        let currentMonth = new Date(data[0].timestamp).getMonth();
+        let currentYear = new Date(data[0].timestamp).getFullYear();
+        let monthEntries = [];
+      
+        for (let entry of data) {
+          const entryMonth = new Date(entry.timestamp).getMonth();
+          const entryYear = new Date(entry.timestamp).getFullYear();
+      
+          if (entryYear > currentYear || (entryYear === currentYear && entryMonth > currentMonth)) {
+            // Data is in a new month, calculate the average for the current month
+            if (monthEntries.length > 0) {
+              const averageEntry = calculateAverageForMonth(monthEntries, currentMonth, currentYear);
+              monthlyData.push(averageEntry);
+            }
+      
+            // Reset the current month and year
+            currentMonth = entryMonth;
+            currentYear = entryYear;
+            monthEntries = [entry];
+          } else {
+            // Data is within the current month, add it to the monthEntries array
+            monthEntries.push(entry);
+          }
+        }
+      
+        // Calculate the average for the last month
+        if (monthEntries.length > 0) {
+          const averageEntry = calculateAverageForMonth(monthEntries, currentMonth, currentYear);
+          monthlyData.push(averageEntry);
+        }
+      
+        return monthlyData;
       break;
+      
+  
     case "Hourly":
       timeFrame = 60 * 60 * 1000; // 1 hour
       break;
@@ -49,8 +83,12 @@ export function getAverage(data, frame) {
       throw new Error("Invalid time frame");
   }
 
+  // Convert the timestamp strings to Date objects.
+
+
   // Initialize variables for the aggregation process.
   let currentFrameStart = data[0].timestamp.getTime();
+  currentFrameStart = Math.floor(currentFrameStart / timeFrame) * timeFrame; // Set the start to the nearest boundary.
   let frameData = [];
   let aggregatedData = [];
 
@@ -64,6 +102,25 @@ export function getAverage(data, frame) {
       if (frameData.length > 0) {
         const frameTimestamp = new Date(currentFrameStart + timeFrame / 2); // Use the midpoint of the frame as the timestamp.
         const averageEntry = { timestamp: frameTimestamp };
+
+        // Calculate the date range label.
+        const startDate = frameData[0].timestamp;
+        const endDate = frameData[frameData.length - 1].timestamp;
+        const localeOptionsDay = { year: 'numeric', month: '2-digit', day: '2-digit', };
+        const localeOptionsHourly = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+
+        if(frame === "Hourly") {
+          averageEntry.label = startDate.toLocaleDateString(undefined, localeOptionsHourly) + " ~ " + endDate.toLocaleDateString(undefined, localeOptionsHourly);
+    
+        } else if (frame === "Daily") {
+          averageEntry.label = startDate.toLocaleDateString(undefined, localeOptionsDay) 
+    
+        } else {
+          averageEntry.label = startDate.toLocaleDateString(undefined, localeOptionsDay) + " ~ " + endDate.toLocaleDateString(undefined, localeOptionsDay);
+    
+        }
+    
+
 
         // Calculate the average for each parameter.
         for (let param of Object.keys(frameData[0])) {
@@ -87,6 +144,24 @@ export function getAverage(data, frame) {
     const frameTimestamp = new Date(currentFrameStart + timeFrame / 2);
     const averageEntry = { timestamp: frameTimestamp };
 
+    // Calculate the date range label.
+    const startDate = frameData[0].timestamp;
+    const endDate = frameData[frameData.length - 1].timestamp;
+    const localeOptionsDay = { year: 'numeric', month: '2-digit', day: '2-digit', };
+    const localeOptionsHourly = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+
+    if(frame === "Hourly") {
+      averageEntry.label = startDate.toLocaleDateString(undefined, localeOptionsHourly) + " ~ " + endDate.toLocaleDateString(undefined, localeOptionsHourly);
+
+    } else if (frame === "Daily") {
+      averageEntry.label = startDate.toLocaleDateString(undefined, localeOptionsDay) 
+
+    } else {
+      averageEntry.label = startDate.toLocaleDateString(undefined, localeOptionsDay) + " ~ " + endDate.toLocaleDateString(undefined, localeOptionsDay);
+
+    }
+
+
     for (let param of Object.keys(frameData[0])) {
       if (param !== "timestamp") {
         const total = frameData.reduce((acc, dataEntry) => acc + dataEntry[param], 0);
@@ -98,4 +173,21 @@ export function getAverage(data, frame) {
   }
 
   return aggregatedData;
+}
+function calculateAverageForMonth(entries, month, year) {
+  const averageEntry = { timestamp: new Date(year, month, 1) }; // Use the first day of the month as the timestamp
+
+  // Calculate the average for each parameter
+  for (let param of Object.keys(entries[0])) {
+    if (param !== "timestamp") {
+      const total = entries.reduce((acc, dataEntry) => acc + dataEntry[param], 0);
+      averageEntry[param] = total / entries.length;
+    }
+  }
+
+  // Generate a custom label based on your requirements
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  averageEntry.label = `${monthNames[month]} ${year}`;
+
+  return averageEntry;
 }

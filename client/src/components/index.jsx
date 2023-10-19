@@ -12,7 +12,7 @@ export default function Graph() {
   const [showingData, setShowingData] = useState([]);
 
   const [buttonPressed, setButtonPressed] = useState(false);
-
+  const [csvData, setCsvData] = useState([]);
   const [graph, setGraph] = useState({
     type: "",
     info: "",
@@ -30,28 +30,37 @@ export default function Graph() {
 
   useEffect(() => {
     const fetchData = () => {
-      GetData().then((data) => {
-        const sorted = data.data.sort((a, b) => {
-          const timestampA = new Date(a.timestamp);
-          const timestampB = new Date(b.timestamp);
-          return timestampA - timestampB;
+      GetData()
+        .then((data) => {
+          const sorted = data.data.sort((a, b) => {
+            const timestampA = new Date(a.timestamp);
+            const timestampB = new Date(b.timestamp);
+            return timestampA - timestampB;
+          });
+          setShowingData(sorted);
+          setFullData(sorted);
+          setButtonPressed(false);
+        })
+        .catch((error) => {
+          alert(
+            "Data was unable to be recieved. Please check API or Plant Status"
+          );
         });
-        setShowingData(sorted);
-        setFullData(sorted);
-        setButtonPressed(false);
-      });
     };
-    fetchData();
-    const dataFetchInterval = setInterval(() => {
+
+    if (fullData.length === 0) {
       fetchData();
-    }, 60000); // 30 seconds
-    return () => {
+    }
+    /*  const dataFetchInterval = setInterval(() => {
+      fetchData();
+    }, 60000);
+     return () => {
       clearInterval(dataFetchInterval);
-    };
+    }; */
   }, []);
 
   useEffect(() => {
-    if (fullData.length > 0) {
+    if (fullData.length > 0 && graph.timeEnd > graph.timeStart) {
       const startTimeMillis = Date.parse(graph.timeStart); // Convert startTime to milliseconds
       const endTimeMillis = Date.parse(graph.timeEnd); // Convert endTime to milliseconds
 
@@ -64,7 +73,8 @@ export default function Graph() {
       });
       setShowingData(timeFrameData);
     }
-  }, [graph.timeEnd, graph.timeStart]);
+  }, [graph.timeEnd, graph.timeStart, fullData]);
+
   return (
     <>
       <Grid width="100%" justifyContent={"center"} container>
@@ -75,6 +85,8 @@ export default function Graph() {
             graphInfo={graph.info}
             data={showingData}
             timeFrame={graph.timeFrame}
+            setGraph={setGraph}
+            setCSVData={setCsvData}
           />
         </GraphDiv>
         <TableContentDiv>
@@ -82,6 +94,8 @@ export default function Graph() {
             buttonClick={handleButtonClick}
             graph={graph}
             setGraph={setGraph}
+            data={csvData}
+            fullData={fullData}
           />{" "}
         </TableContentDiv>
       </Grid>
