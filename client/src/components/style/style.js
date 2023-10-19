@@ -87,14 +87,21 @@ width : 70vw;
 height : 100%; 
 `
 export const TableContentDiv = styled ("div")`
-margin-top : 10vw;
+margin-top : 3vw;
 width : 25vw;
 height : 100%; 
 `
 export const AverageValueTitle = styled ("p")`
 color: rgba(192, 192, 192, 0.9);
+font-size : 1.2rem;
+
 `
 export const AverageValueInfo = styled ("p")`
 color: rgba(192, 192, 192, 0.9);
 
+
+`
+export const TimeInfo = styled ("p")`
+color: rgba(192, 192, 192, 0.9);
+font-size : 1.2rem;
 `

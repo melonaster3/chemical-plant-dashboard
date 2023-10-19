@@ -5,7 +5,6 @@ import { BarGraph } from "./Bar";
 export function GraphContent(props) {
   const graph = props.graph;
   const data = props.data;
-  console.log(props.graphInfo);
   return (
     <>
       {graph.type && data.length > 0 && graph.timeFrame ? (
@@ -15,6 +14,9 @@ export function GraphContent(props) {
               type={props.graphInfo}
               data={data}
               timeFrame={graph.timeFrame}
+              setGraph={props.setGraph}
+              graph={props.graph}
+              setCSVData={props.setCSVData}
             />
           )}
           {!graph.type && (
@@ -22,6 +24,9 @@ export function GraphContent(props) {
               type={props.graphInfo}
               data={data}
               timeFrame={graph.timeFrame}
+              setGraph={props.setGraph}
+              graph={props.graph}
+              setCSVData={props.setCSVData}
             />
           )}
           {graph.type === "Bar" && (
@@ -29,6 +34,9 @@ export function GraphContent(props) {
               type={props.graphInfo}
               data={data}
               timeFrame={graph.timeFrame}
+              setGraph={props.setGraph}
+              graph={props.graph}
+              setCSVData={props.setCSVData}
             />
           )}
         </>
