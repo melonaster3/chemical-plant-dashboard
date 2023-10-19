@@ -37,6 +37,8 @@ export function GetGraphSettingsLine(type, plotData) {
     },
     scales: {
     x: {
+      offset: true,
+
             stacked: type === "Level" ? true : false
             , grid: {
               color: 'rgba(192, 192, 192, 0.3)', 
@@ -72,7 +74,7 @@ export function GetGraphSettingsLine(type, plotData) {
   };
 
   const labels = plotData.map((data2) => {
-    return timestampToReadableDate(data2.timestamp);
+    return data2.label
   });
 
   let datasets = [];
