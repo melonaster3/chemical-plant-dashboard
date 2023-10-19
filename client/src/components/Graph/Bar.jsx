@@ -54,7 +54,7 @@ export function BarGraph(props) {
       setChartData(GraphSettings.chartData);
       props.setCSVData(dataAVG);
     }
-  }, [barType, timeFrame, props.data]);
+  }, [barType, timeFrame, props.data, graph.timeEnd, graph.timeStart]);
 
   return (
     <>

@@ -13,8 +13,6 @@ export const CSVExport = (props) => {
   const [csv, setCSV] = useState("");
   const exportToExcel = (type) => {
     if (type === "all") {
-      console.log(props.fullData);
-
       const ws = XLSX.utils.json_to_sheet(props.fullData);
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, "Sheet1");

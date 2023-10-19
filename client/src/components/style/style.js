@@ -61,6 +61,15 @@ font-weight : bold;
     background-color: rgba(0, 0, 255, 0.2); 
   }
 `;
+export const LastButton = styled(Button)`
+color : #6db458 ;
+border: 1px solid #6db458 ;
+background-color : transparent;
+font-weight : bold;
+&:hover {
+    background-color: rgba(0, 0, 255, 0.2); 
+  }
+`;
 export const FetchButton = styled(Button)`
 background-color : #9A6F27;
 
