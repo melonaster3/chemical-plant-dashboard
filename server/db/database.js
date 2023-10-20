@@ -1,20 +1,21 @@
 
+require('dotenv').config();
 
 const { Pool } = require('pg');
 const {dummyDatasets, generateData} = require('./dummyData.js'); // Import the data
 
 const pool = new Pool({
-  user: 'labber',
-  host: 'localhost',
-  database: 'mydb',
-  password: 'labber',
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD || "labber",
+  port: parseInt(process.env.DB_PORT),
 });
 
 // Function to create tables
 const createUserTable = async () => {
   const deleteDataQuery = `
-  DELETE FROM sensor_data
+  DROP TABLE IF EXISTS sensor_data;
 `;
 
 const createTableQuery = `
@@ -45,13 +46,7 @@ const insertData = async (data) => {
   // Insert the dummy data into the database
   await pool.query(deleteDataQuery);
 
-  dummyDatasets.forEach((data) => {
-    insertData(data);
-  });
-  const simulatedData = generateData();
-  simulatedData.forEach((data) => {
-    insertData(data);
-  });
+
   
   pool.query(createTableQuery, (err, result) => {
     if (err) {
@@ -59,6 +54,14 @@ const insertData = async (data) => {
     } else {
       console.log('Table created (if it did not already exist).');
     }
+  });
+
+  dummyDatasets.forEach((data) => {
+    insertData(data);
+  });
+  const simulatedData = generateData();
+  simulatedData.forEach((data) => {
+    insertData(data);
   });
   
   

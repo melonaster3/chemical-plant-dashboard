@@ -1,15 +1,16 @@
 // routes/index.js
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const { Pool } = require('pg');
 
 // Database configuration for the routes file
 const pool = new Pool({
-  user: 'labber',
-  host: 'localhost',
-  database: 'mydb',
-  password: 'labber',
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD || "labber",
+  port: parseInt(process.env.DB_PORT),
 });
 
 router.get('/data', async (req, res) => {
