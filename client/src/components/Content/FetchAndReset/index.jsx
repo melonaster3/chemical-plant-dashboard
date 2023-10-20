@@ -1,9 +1,12 @@
 import { Grid } from "@mui/material";
 import { FetchButton } from "../../style/style";
+import { GetTimeRightNow } from "../../../services/Time/time";
 
 export const FetchAndReset = (props) => {
   const handleButtonClick = props.buttonClick;
   const graph = props.graph;
+  const timeRightNow = GetTimeRightNow();
+
   const setGraph = props.setGraph;
   return (
     <>
@@ -23,12 +26,12 @@ export const FetchAndReset = (props) => {
           <FetchButton
             onClick={() =>
               setGraph({
-                ...graph, // Spread the current state
+                ...graph,
                 type: "",
                 info: "",
                 timeFrame: "",
                 timeStart: "",
-                timeEnd: "",
+                timeEnd: timeRightNow,
                 avg: "",
                 max: "",
                 min: "",

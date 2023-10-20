@@ -18,7 +18,7 @@ export default function Graph() {
   const [graph, setGraph] = useState({
     type: "",
     info: "",
-    timeFrame: "Weekly",
+    timeFrame: "",
     timeStart: "",
     timeEnd: TimeRightNow,
     avg: "",
@@ -51,19 +51,25 @@ export default function Graph() {
         });
     };
 
-    if (fullData.length === 0) {
+    if (fullData.length === 0 || buttonPressed === true) {
       fetchData();
+      setButtonPressed(false);
     }
-    /*  const dataFetchInterval = setInterval(() => {
+    const dataFetchInterval = setInterval(() => {
       fetchData();
-    }, 60000);
-     return () => {
+    }, 60000 * 5);
+    return () => {
       clearInterval(dataFetchInterval);
-    }; */
-  }, []);
+    };
+  }, [buttonPressed]);
 
   useEffect(() => {
-    if (fullData.length > 0 && graph.timeEnd > graph.timeStart) {
+    if (
+      fullData.length > 0 &&
+      graph.timeStart &&
+      graph.timeEnd &&
+      graph.timeEnd > graph.timeStart
+    ) {
       const startTimeMillis = Date.parse(graph.timeStart); // Convert startTime to milliseconds
       const endTimeMillis = Date.parse(graph.timeEnd); // Convert endTime to milliseconds
 

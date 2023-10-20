@@ -10,7 +10,7 @@ export function GraphContent(props) {
   const emptyGraph = EmptyGraph();
   return (
     <>
-      {graph.type && data.length > 0 && graph.timeFrame ? (
+      {graph.type && data.length > 0 ? (
         <>
           {graph.type === "Line" && (
             <LineGraph
@@ -22,7 +22,6 @@ export function GraphContent(props) {
               setCSVData={props.setCSVData}
             />
           )}
-
           {graph.type === "Bar" && (
             <BarGraph
               type={props.graphInfo}

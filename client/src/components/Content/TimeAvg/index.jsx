@@ -1,5 +1,6 @@
 import { Grid } from "@mui/material";
 import {
+  AverageValueInfo,
   SelectedButton,
   SelectedTimeButton,
   TimeButton,
@@ -8,11 +9,14 @@ import {
 export const TimeAvg = (props) => {
   const graph = props.graph;
   const setGraph = props.setGraph;
-  const type = ["Hourly", "Daily", "Weekly", "Monthly"];
+  const type = ["Hourly", "Daily", "Weekly", "Monthly", "Reset"];
 
   return (
     <>
       <Grid xs={12} rowSpaing={1} columnSpacing={1} item container>
+        <Grid xs={12} item container>
+          <AverageValueInfo>Average</AverageValueInfo>
+        </Grid>
         {type.map((types) => {
           return (
             <Grid xs={3} item container marginBottom="2rem">
@@ -32,7 +36,7 @@ export const TimeAvg = (props) => {
                   onClick={() =>
                     setGraph({
                       ...graph, // Spread the current state
-                      timeFrame: types, // Update the 'info' property
+                      timeFrame: types !== "Reset" ? types : "", // Update the 'info' property
                     })
                   }
                 >

@@ -16,9 +16,23 @@ export function timestampToReadableDate(timestamp) {
   // Format the date and return it as a readable string
   return date.toLocaleDateString(undefined, options);
 }
+
+
 export function getAverage(data, frame) {
   if (!data || data.length === 0) {
     return []; // Return an empty array if the data is empty or undefined.
+  }
+  if (!frame) {
+    data = data.map((entry) => ({
+      ...entry,
+      temperature: parseFloat(entry.temperature),
+      pressure: parseFloat(entry.pressure),
+      level1_chemical: parseFloat(entry.level1_chemical),
+      level2_chemical: parseFloat(entry.level2_chemical),
+      isoTimeStamp : entry.timestamp,
+      timestamp: new Date(entry.timestamp),
+    }));
+    return data
   }
   data = data.map((entry) => ({
     ...entry,
@@ -26,12 +40,12 @@ export function getAverage(data, frame) {
     pressure: parseFloat(entry.pressure),
     level1_chemical: parseFloat(entry.level1_chemical),
     level2_chemical: parseFloat(entry.level2_chemical),
+    isoTimeStamp : entry.timestamp,
     timestamp: new Date(entry.timestamp),
   }));
-  // Calculate the time frame (in milliseconds) based on the user's selection.
+
   let timeFrame;
   let labelFormat = "MM/DD/YYYY h:mma";
-  const localeOptions = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
   switch (frame) {
     case "Daily":
       timeFrame = 24 * 60 * 60 * 1000; // 1 day
@@ -75,9 +89,7 @@ export function getAverage(data, frame) {
         }
       
         return monthlyData;
-      break;
-      
-  
+    
     case "Hourly":
       timeFrame = 60 * 60 * 1000; // 1 hour
       break;
@@ -90,9 +102,21 @@ export function getAverage(data, frame) {
 
   // Initialize variables for the aggregation process.
   let currentFrameStart = data[0].timestamp.getTime();
-  currentFrameStart = Math.floor(currentFrameStart / timeFrame) * timeFrame; // Set the start to the nearest boundary.
   let frameData = [];
   let aggregatedData = [];
+
+  if (frame === "Daily"|| frame === "Week" || frame === "Monthly") {
+    const startDate = new Date(currentFrameStart);
+    startDate.setHours(0, 0, 0, 0); // Set the time to midnight (start of the day)
+    currentFrameStart = startDate.getTime(); // Get the timestamp for the start of the day
+      
+  }
+
+    currentFrameStart = Math.floor(currentFrameStart / timeFrame) * timeFrame; // Set the start to the nearest boundary.
+  
+   
+
+
 
   // Iterate through the data to calculate averages.
   for (let entry of data) {
@@ -104,63 +128,65 @@ export function getAverage(data, frame) {
       if (frameData.length > 0) {
         const frameTimestamp = new Date(currentFrameStart + timeFrame / 2); // Use the midpoint of the frame as the timestamp.
         const averageEntry = { timestamp: frameTimestamp };
-
+  
+        // Set isoTimeStamp to the timestamp of the START of the frame in ISO format.
+        averageEntry.isoTimeStamp = new Date(currentFrameStart).toISOString();
+  
         // Calculate the date range label.
-        const startDate = frameData[0].timestamp;
-        const endDate = frameData[frameData.length - 1].timestamp;
-        const localeOptionsDay = { year: 'numeric', month: '2-digit', day: '2-digit', };
+        const startDateDate = frameData[0].timestamp;
+        let  startDate = new Date(startDateDate).setMinutes(0);
+    startDate = new Date(startDate)
+        let endDate = frameData[frameData.length - 1].timestamp;
+        const localeOptionsDay = { year: 'numeric', month: '2-digit', day: '2-digit' };
         const localeOptionsHourly = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
-
+  
         if(frame === "Hourly") {
-          averageEntry.label = startDate.toLocaleDateString(undefined, localeOptionsHourly) + " ~ " + endDate.toLocaleDateString(undefined, localeOptionsHourly);
-    
+          averageEntry.label = startDate.toLocaleDateString(undefined, localeOptionsHourly) 
         } else if (frame === "Daily") {
           averageEntry.label = startDate.toLocaleDateString(undefined, localeOptionsDay) 
-    
         } else {
-          averageEntry.label = startDate.toLocaleDateString(undefined, localeOptionsDay) + " ~ " + endDate.toLocaleDateString(undefined, localeOptionsDay);
-    
+        
+            averageEntry.label = startDate.toLocaleDateString(undefined, localeOptionsDay) + " ~ " + endDate.toLocaleDateString(undefined, localeOptionsDay);
+     
         }
-    
-
-
-        // Calculate the average for each parameter.
+        // Calculate the average for each parameter without changing the numeric values.
         for (let param of Object.keys(frameData[0])) {
-          if (param !== "timestamp") {
+          if (param !== "timestamp" && param !== "isoTimeStamp") {
             const total = frameData.reduce((acc, dataEntry) => acc + dataEntry[param], 0);
             averageEntry[param] = total / frameData.length;
           }
         }
-
+  
         aggregatedData.push(averageEntry);
       }
-
+  
       // Move to the next time frame.
       currentFrameStart += timeFrame;
       frameData = [entry];
     }
   }
-
   // Ensure the last frame is processed.
   if (frameData.length > 0) {
     const frameTimestamp = new Date(currentFrameStart + timeFrame / 2);
     const averageEntry = { timestamp: frameTimestamp };
 
     // Calculate the date range label.
-    const startDate = frameData[0].timestamp;
+    const startDateDate = frameData[0].timestamp;
+    let  startDate = new Date(startDateDate).setMinutes(0);
+    startDate = new Date(startDate)
+
     const endDate = frameData[frameData.length - 1].timestamp;
     const localeOptionsDay = { year: 'numeric', month: '2-digit', day: '2-digit', };
     const localeOptionsHourly = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
 
     if(frame === "Hourly") {
-      averageEntry.label = startDate.toLocaleDateString(undefined, localeOptionsHourly) + " ~ " + endDate.toLocaleDateString(undefined, localeOptionsHourly);
+      averageEntry.label = startDate.toLocaleDateString(undefined, localeOptionsHourly) 
 
     } else if (frame === "Daily") {
       averageEntry.label = startDate.toLocaleDateString(undefined, localeOptionsDay) 
 
     } else {
       averageEntry.label = startDate.toLocaleDateString(undefined, localeOptionsDay) + " ~ " + endDate.toLocaleDateString(undefined, localeOptionsDay);
-
     }
 
 
@@ -173,7 +199,7 @@ export function getAverage(data, frame) {
 
     aggregatedData.push(averageEntry);
   }
-
+  
   return aggregatedData;
 }
 function calculateAverageForMonth(entries, month, year) {
