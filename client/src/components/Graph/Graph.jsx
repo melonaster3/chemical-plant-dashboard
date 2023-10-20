@@ -3,6 +3,7 @@ import LineGraph from "./Line";
 import { BarGraph } from "./Bar";
 import { EmptyGraph } from "../../services/LineGraph/lineType";
 import { Line } from "react-chartjs-2";
+import { ScaleContent } from "./Scale";
 
 export function GraphContent(props) {
   const graph = props.graph;
@@ -32,6 +33,8 @@ export function GraphContent(props) {
               setCSVData={props.setCSVData}
             />
           )}
+          {/*           <ScaleContent graph={graph} data={data} setGraph={props} />
+           */}{" "}
         </>
       ) : (
         <Line data={emptyGraph.data} options={emptyGraph.options} />

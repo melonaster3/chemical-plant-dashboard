@@ -24,6 +24,8 @@ export default function Graph() {
     avg: "",
     max: "",
     min: "",
+    yMax: "",
+    yMin: "",
   });
 
   const handleButtonClick = () => {

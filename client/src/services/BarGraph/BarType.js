@@ -10,11 +10,7 @@ export function GetGraphSettings(type, plotData,avgType) {
       legend: {
         position: "top",
       },
-     /*  annotation : {
-        annotations : {
-          annotation
-        }
-      }, */
+ 
       title: {
         display: true,
         text: "Plant Bar Chart",
@@ -58,6 +54,7 @@ export function GetGraphSettings(type, plotData,avgType) {
       },
   
       y: {
+    
         title: {
           display: true,
           text: `

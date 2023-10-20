@@ -94,11 +94,26 @@ export const GraphDiv = styled ("div")`
 margin-right : 2vw;
 width : 70vw;
 height : 100%; 
+@media (max-width: 1400px) {
+  width: 100vw;
+  display : flex;
+  flex-direction : row;
+  justify-content : center;
+}
 `
 export const TableContentDiv = styled ("div")`
 margin-top : 3vw;
 width : 25vw;
 height : 100%; 
+@media (min-width:870px) and (max-width: 1400px) {
+  width: 40vw;
+}
+@media (min-width:579px) and (max-width: 870px) {
+  width: 60vw;
+}
+@media (min-width:0px) and (max-width: 579px) {
+  width: 90vw;
+}
 `
 export const AverageValueTitle = styled ("p")`
 color: rgba(192, 192, 192, 0.9);
@@ -113,4 +128,9 @@ color: rgba(192, 192, 192, 0.9);
 export const TimeInfo = styled ("p")`
 color: rgba(192, 192, 192, 0.9);
 font-size : 1.2rem;
+`
+export const MaxMin = styled ("p")`
+color: rgba(192, 192, 192, 0.9);
+font-size : 1rem;
+
 `
