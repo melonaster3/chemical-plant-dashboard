@@ -1,4 +1,4 @@
-# Real-time Chemical Plant Dashboard
+![image](https://github.com/melonaster3/chemical-plant-dashboard/assets/101602590/925dadd4-c79c-4699-9fa4-144db1ab7901)# Real-time Chemical Plant Dashboard
 
 The Real-time Chemical Plant Dashboard is a web application built with React.js for the frontend and Node.js for the backend. It provides a user-friendly interface for monitoring and visualizing real-time data from a virtual chemical plant. The project includes various features and components for data visualization and interaction.
 
@@ -33,8 +33,8 @@ The Real-time Chemical Plant Dashboard is a web application built with React.js 
 ## Functionality
 
 ### Main Page
-![MainPage](([https://github.com/melonaster3/chemical-plant-dashboard/blob/new-main/client/public/simacro.png?raw=true](https://github.com/melonaster3/chemical-plant-dashboard/blob/new-main/client/public/simacro2.png)))
 
+![MainPage](https://github.com/melonaster3/chemical-plant-dashboard/blob/new-main/client/public/simacro2.png?raw=true) 
 
 The Main page is very simple for all users to use. It consists of the chart/graph for users to use on the right side, and a series of buttons for users to use to modify what is showin in the chart
 
@@ -67,8 +67,9 @@ The Purple buttons will allow users to export the data in to a xlsx file. Graph 
 On the bottom, the average, max and min value of each components will be shown with data on the graph.
 
 
-![MainPage]((https://github.com/melonaster3/chemical-plant-dashboard/blob/new-main/client/public/simacro2.png?raw=true))
+![MainPage](https://github.com/melonaster3/chemical-plant-dashboard/blob/new-main/client/public/simacro.png?raw=true)
 
+![MainPage2](https://github.com/melonaster3/chemical-plant-dashboard/assets/101602590/0d2a000b-6ede-4015-a55f-0c9b296a8165)
 
 ## Dependencies
 
