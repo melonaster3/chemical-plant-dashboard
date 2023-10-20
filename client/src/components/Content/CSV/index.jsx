@@ -11,8 +11,11 @@ import { useState } from "react";
 export const CSVExport = (props) => {
   const graph = props.graph;
   const [csv, setCSV] = useState("");
+
+  // Define a function to export data to Excel based on the 'type' argument
   const exportToExcel = (type) => {
     if (type === "all") {
+      // Export all data to Excel
       const ws = XLSX.utils.json_to_sheet(props.fullData);
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
@@ -21,6 +24,7 @@ export const CSVExport = (props) => {
         `${graph.timeFrame}-${graph.timeStart}-${graph.timeEnd}.xlsx`
       );
     } else if (type === "graph") {
+      // Export graph-specific data to Excel
       const editedData = props.data.map((data) => {
         return {
           Date_Range: data.label,
@@ -52,16 +56,17 @@ export const CSVExport = (props) => {
         container
       >
         <Grid xs={12} item container>
-          <AverageValueInfo>Excel Data</AverageValueInfo>
+          <AverageValueInfo>Excel Data</AverageValueInfo> // Display a label for
+          the Excel data
         </Grid>
         <Grid xs={4} item container>
           <SelectedTypeButton onClick={() => exportToExcel("graph")}>
-            Graph Data
+            Graph Data // Button to export graph-specific data to Excel
           </SelectedTypeButton>
         </Grid>
         <Grid xs={4} item container>
           <SelectedTypeButton onClick={() => exportToExcel("all")}>
-            Full Data
+            Full Data // Button to export all data to Excel
           </SelectedTypeButton>
         </Grid>
       </Grid>

@@ -25,7 +25,7 @@ export const TimeAvg = (props) => {
                   onClick={() =>
                     setGraph({
                       ...graph, // Spread the current state
-                      timeFrame: "", // Update the 'info' property
+                      timeFrame: "", // Update the 'timeFrame' property
                     })
                   }
                 >
@@ -36,7 +36,7 @@ export const TimeAvg = (props) => {
                   onClick={() =>
                     setGraph({
                       ...graph, // Spread the current state
-                      timeFrame: types !== "Reset" ? types : "", // Update the 'info' property
+                      timeFrame: types !== "Reset" ? types : "", // Update the 'timeFrame' property
                     })
                   }
                 >

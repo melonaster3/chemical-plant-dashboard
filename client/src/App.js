@@ -4,6 +4,7 @@ import Graph from "./components/index";
 import { ThemeProvider, createTheme, styled, useTheme } from '@mui/material/styles';
 function App() {
 
+  // There for Material UI
   const theme = createTheme({
     palette: {
       primary: {
@@ -25,12 +26,14 @@ function App() {
         dark: '#2E7D32', // Dark Background
       },
     },
+    // Assign Font types
     typography: {
       typography: {
         fontFamily: 'Roboto, sans-serif',
       },
     },
- 
+
+     // Assign Global Buttons
     components: {
        MuiButton: {
           styleOverrides: {
@@ -46,7 +49,7 @@ function App() {
               },
           },
        },
- 
+      // Assign Global Buttons
        MuiButtonBase: {
           styleOverrides: {
              root: {
@@ -69,8 +72,9 @@ function App() {
   <ThemeProvider theme={appTheme}>
     <div className="App">
       <header className="App-header">
+              <Logo src={"/simacro.svg"}/> 
+
         <h1 style={{ color: appTheme.palette.primary.main }}>Chemical Dashboard</h1>
-       {/*  <Logo src={"/simacro.svg"}/> */}
         <Graph />
       </header>
     </div>

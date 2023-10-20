@@ -1,20 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
-
 import { GetData } from "../services/APICall";
 import { Button, Grid, Input } from "@mui/material";
-
 import { TableContent } from "./Content";
 import { GraphContent } from "./Graph/Graph";
 import { GraphDiv, TableContentDiv } from "./style/style";
 import { GetTimeRightNow } from "../services/Time/time";
 
 export default function Graph() {
+  // Full non formatted data from call
   const [fullData, setFullData] = useState([]);
+
+  // Full formatted data (time, type etc..)
   const [showingData, setShowingData] = useState([]);
 
+  // For Fetching new data
   const [buttonPressed, setButtonPressed] = useState(false);
+
+  // For exporting to Excel
+
   const [csvData, setCsvData] = useState([]);
+
   const TimeRightNow = GetTimeRightNow();
+
+  // Define the main graph state to show
   const [graph, setGraph] = useState({
     type: "",
     info: "",
@@ -32,6 +40,7 @@ export default function Graph() {
     setButtonPressed(true);
   };
 
+  // Useeffect for calling the data from the backend
   useEffect(() => {
     const fetchData = () => {
       GetData()
@@ -53,10 +62,13 @@ export default function Graph() {
         });
     };
 
+    // Call made when there is no data or fetch button has been pressed
     if (fullData.length === 0 || buttonPressed === true) {
       fetchData();
       setButtonPressed(false);
     }
+
+    // Automatic data fetch every 5 minutes
     const dataFetchInterval = setInterval(() => {
       fetchData();
     }, 60000 * 5);
@@ -65,6 +77,7 @@ export default function Graph() {
     };
   }, [buttonPressed]);
 
+  // Useeffect for setting the showing data (on screen), changes whenever timeframe is changed
   useEffect(() => {
     if (
       fullData.length > 0 &&
@@ -74,7 +87,6 @@ export default function Graph() {
     ) {
       const startTimeMillis = Date.parse(graph.timeStart); // Convert startTime to milliseconds
       const endTimeMillis = Date.parse(graph.timeEnd); // Convert endTime to milliseconds
-
       const timeFrameData = fullData.filter((data) => {
         const dataTimestampMillis = Date.parse(data.timestamp); // Convert data timestamp to milliseconds
         return (

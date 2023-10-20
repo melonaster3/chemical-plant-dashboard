@@ -6,13 +6,13 @@ export const FetchAndReset = (props) => {
   const handleButtonClick = props.buttonClick;
   const graph = props.graph;
   const timeRightNow = GetTimeRightNow();
-
   const setGraph = props.setGraph;
+
   return (
     <>
       <Grid
         xs={12}
-        rowSpaing={1}
+        rowSpacing={1}
         columnSpacing={1}
         item
         container
@@ -20,10 +20,16 @@ export const FetchAndReset = (props) => {
         marginBottom="2rem"
       >
         <Grid xs={3} item container>
-          <FetchButton onClick={handleButtonClick}>Fetch Data</FetchButton>{" "}
+          {
+            {
+              /* Button will fetch current new data */
+            }
+          }
+          <FetchButton onClick={handleButtonClick}>Fetch Data</FetchButton>
         </Grid>
         <Grid xs={3} item container>
           <FetchButton
+            //Button will reset all options
             onClick={() =>
               setGraph({
                 ...graph,

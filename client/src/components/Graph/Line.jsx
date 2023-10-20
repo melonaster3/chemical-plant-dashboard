@@ -18,9 +18,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { GetGraphSettingsLine } from "../../services/LineGraph/lineType";
 import { getAverage } from "../../services/Time/time";
 
+// Register Chart.js components and plugins
 ChartJS.register(
-  /*   CategoryScale,
-   */ LinearScale,
+  CategoryScale,
+  LinearScale,
   TimeScale,
   PointElement,
   LineElement,
@@ -30,17 +31,22 @@ ChartJS.register(
 );
 
 export default function LineGraph(props) {
+  // Extract props
   const lineType = props.type;
   const timeFrame = props.timeFrame;
   const setGraph = props.setGraph;
   const graph = props.graph;
 
+  // State variables to store chart options, labels, and data
   const [options, setOptions] = useState({});
   const [labels, setLabels] = useState([]);
   const [chartData, setChartData] = useState({});
 
+  // Use useEffect to handle updates when props or state change
   useEffect(() => {
+    // Calculate average data based on the selected time frame
     const dataAVG = getAverage(props.data, timeFrame);
+    // Calculate statistics for the chart and update the graph state
     const info = GetOverallAverage(dataAVG, lineType);
     if (lineType !== "Level") {
       setGraph({
@@ -58,11 +64,14 @@ export default function LineGraph(props) {
       });
     }
 
+    // Generate chart settings based on the selected line type and data
     const GraphSettings = GetGraphSettingsLine(
       lineType,
       dataAVG,
       graph.timeFrame
     );
+
+    // Update state variables with chart settings, labels, and data
     if (GraphSettings) {
       setOptions(GraphSettings.options);
       setLabels(GraphSettings.labels);

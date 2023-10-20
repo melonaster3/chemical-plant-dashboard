@@ -7,8 +7,9 @@ import {
 
 export const FurtherInfo = (props) => {
   const graph = props.graph;
-
   let unit = "";
+
+  // Determine the unit based on the graph type
   if (graph.info === "Temperature") {
     unit = "°C";
   } else if (graph.info === "Pressure") {
@@ -16,6 +17,8 @@ export const FurtherInfo = (props) => {
   } else if (graph.info === "Level") {
     unit = "L";
   }
+
+  // Function to round and format a value to two decimal places with the unit
   const roundToTwoDecimals = (value) => {
     if (
       typeof value !== "number" ||
@@ -27,7 +30,7 @@ export const FurtherInfo = (props) => {
     }
     return parseFloat(value).toFixed(2) + unit;
   };
-  console.log(graph);
+
   return (
     <>
       <Grid
@@ -35,12 +38,13 @@ export const FurtherInfo = (props) => {
         marginBottom="2rem"
         item
         container
-        rowSpaing={4}
+        rowSpacing={4}
         columnSpacing={4}
       >
         <Grid xs={12} item container>
           <Grid xs={12} item container>
             {graph.info !== "Level" ? (
+              // Display average information for non-level data
               <>
                 <Grid xs={6} item container>
                   <AverageValueTitle>Average</AverageValueTitle>
@@ -52,6 +56,7 @@ export const FurtherInfo = (props) => {
                 </Grid>
               </>
             ) : (
+              // Display average information for level data
               <>
                 <Grid xs={12} item container>
                   <Grid xs={6} item container>
@@ -77,6 +82,7 @@ export const FurtherInfo = (props) => {
 
           <Grid xs={12} item container>
             {graph.info !== "Level" ? (
+              // Display maximum value information for non-level data
               <>
                 <Grid xs={6} item container>
                   <AverageValueTitle>Max Value</AverageValueTitle>
@@ -88,6 +94,7 @@ export const FurtherInfo = (props) => {
                 </Grid>
               </>
             ) : (
+              // Display maximum value information for level data
               <>
                 <Grid xs={12} item container>
                   <Grid xs={6} item container>
@@ -113,6 +120,7 @@ export const FurtherInfo = (props) => {
 
           <Grid xs={12} item container>
             {graph.info !== "Level" ? (
+              // Display minimum value information for non-level data
               <>
                 <Grid xs={6} item container>
                   <AverageValueTitle>Min Value</AverageValueTitle>
@@ -124,6 +132,7 @@ export const FurtherInfo = (props) => {
                 </Grid>
               </>
             ) : (
+              // Display minimum value information for level data
               <>
                 <Grid xs={12} item container>
                   <Grid xs={6} item container>
@@ -147,7 +156,7 @@ export const FurtherInfo = (props) => {
             )}
           </Grid>
         </Grid>
-      </Grid>{" "}
+      </Grid>
     </>
   );
 };

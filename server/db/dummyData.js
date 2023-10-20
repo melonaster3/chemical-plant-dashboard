@@ -1,3 +1,5 @@
+ 
+// DummyDataset 
  const dummyDatasets = [
     {
       timestamp: "2023-10-13T00:00:00Z",
@@ -91,28 +93,35 @@
   ]; 
 
 
-  const generateData = () => {
-    const timestamp = new Date('2023-10-13T01:00:00Z');
-    const data = [];
+// Function to generate simulated sensor data
+const generateData = () => {
+  // Set an initial timestamp for the data
+  const timestamp = new Date('2023-10-13T01:00:00Z');
+  const data = [];
 
-    for (let i = 0; i < 10080; i++) {
-      const temperature = (Math.random() * (30 - 20) + 20).toFixed(1);
-      const pressure = (Math.random() * (1030 - 1000) + 1000).toFixed(1);
-      const level1_chemical = (Math.random() * (80 - 60) + 60).toFixed(1);
-      const level2_chemical = (Math.random() * (70 - 50) + 50).toFixed(1);
+  // Loop to generate data for a week (10080 records, 5 minutes apart)
+  for (let i = 0; i < 10080; i++) {
+    // Generate random values for temperature, pressure, and two chemical levels
+    const temperature = (Math.random() * (30 - 20) + 20).toFixed(1);
+    const pressure = (Math.random() * (1030 - 1000) + 1000).toFixed(1);
+    const level1_chemical = (Math.random() * (80 - 60) + 60).toFixed(1);
+    const level2_chemical = (Math.random() * (70 - 50) + 50).toFixed(1);
 
-      data.push({
-        timestamp: timestamp.toISOString(),
-        temperature,
-        pressure,
-        level1_chemical,
-        level2_chemical,
-      });
+    // Add the generated data to the 'data' array
+    data.push({
+      timestamp: timestamp.toISOString(),
+      temperature,
+      pressure,
+      level1_chemical,
+      level2_chemical,
+    });
 
-      timestamp.setMinutes(timestamp.getMinutes() + 5);
-    }
+    // Increment the timestamp by 5 minutes for the next data point
+    timestamp.setMinutes(timestamp.getMinutes() + 5);
+  }
 
-    return data;
-  };
+  // Return the array containing the generated data
+  return data;
+};
 
   module.exports = {dummyDatasets, generateData};

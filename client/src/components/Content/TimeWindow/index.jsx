@@ -11,8 +11,10 @@ export const TimeWindow = (props) => {
   const graph = props.graph;
   const setGraph = props.setGraph;
 
+  // Get the current time
   const timeRightNow = GetTimeRightNow();
 
+  // Handle button click to set the time window
   const onClickGraph = (type) => {
     const timeNow = GetTimeRightNow();
     if (type === "Hour") {
@@ -59,7 +61,7 @@ export const TimeWindow = (props) => {
             onChange={(e) => {
               setGraph({
                 ...graph, // Spread the current state
-                timeStart: e.target.value, // Update the 'info' property
+                timeStart: e.target.value, // Update the 'timeStart' property
               });
             }}
             id="StartTime"
@@ -71,14 +73,12 @@ export const TimeWindow = (props) => {
                 color: "rgba(192, 192, 192, 0.9)",
                 borderColor: "white",
               }, // Set the font color to white
-
-              max: graph.timeEnd ? graph.timeEnd : "",
+              max: graph.timeEnd ? graph.timeEnd : "", // Set the maximum date and time
             }}
           ></Input>
         </Grid>
         <Grid xs={6} item container>
           <TimeInfo>End Time</TimeInfo>
-
           <Input
             fullWidth
             defaultValue={timeRightNow}
@@ -86,7 +86,7 @@ export const TimeWindow = (props) => {
             onChange={(e) => {
               setGraph({
                 ...graph, // Spread the current state
-                timeEnd: e.target.value, // Update the 'info' property
+                timeEnd: e.target.value, // Update the 'timeEnd' property
               });
             }}
             id="EndTime"
@@ -96,8 +96,7 @@ export const TimeWindow = (props) => {
                 color: "rgba(192, 192, 192, 0.9)",
                 borderColor: "rgba(192, 192, 192, 0.9)",
               }, // Set the font color to white
-
-              min: graph.timeStart ? graph.timeStart : "", // Replace with your desired minimum date and time
+              min: graph.timeStart ? graph.timeStart : "", // Set the minimum date and time
             }}
           ></Input>
         </Grid>
@@ -123,7 +122,7 @@ export const TimeWindow = (props) => {
             </LastButton>
           </Grid>
         </Grid>
-      </Grid>{" "}
+      </Grid>
     </>
   );
 };

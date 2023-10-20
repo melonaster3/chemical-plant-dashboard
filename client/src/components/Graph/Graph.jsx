@@ -11,6 +11,7 @@ export function GraphContent(props) {
   const emptyGraph = EmptyGraph();
   return (
     <>
+      {/* Show line or Bar Graph depending on what user chooses */}
       {graph.type && data.length > 0 ? (
         <>
           {graph.type === "Line" && (
@@ -33,8 +34,6 @@ export function GraphContent(props) {
               setCSVData={props.setCSVData}
             />
           )}
-          {/*           <ScaleContent graph={graph} data={data} setGraph={props} />
-           */}{" "}
         </>
       ) : (
         <Line data={emptyGraph.data} options={emptyGraph.options} />
