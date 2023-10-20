@@ -19,13 +19,13 @@ import { GetGraphSettingsLine } from "../../services/LineGraph/lineType";
 import { getAverage } from "../../services/Time/time";
 
 ChartJS.register(
-  CategoryScale,
-  LinearScale,
+  /*   CategoryScale,
+   */ LinearScale,
+  TimeScale,
   PointElement,
   LineElement,
   Title,
   Tooltip,
-  TimeScale,
   Legend
 );
 
@@ -42,14 +42,28 @@ export default function LineGraph(props) {
   useEffect(() => {
     const dataAVG = getAverage(props.data, timeFrame);
     const info = GetOverallAverage(dataAVG, lineType);
-    const GraphSettings = GetGraphSettingsLine(lineType, dataAVG);
-    if (GraphSettings) {
+    if (lineType !== "Level") {
       setGraph({
         ...graph,
         avg: info.average,
         max: info.max,
         min: info.min,
       });
+    } else {
+      setGraph({
+        ...graph,
+        avg: info.avgLevel,
+        max: info.levelMax,
+        min: info.levelMin,
+      });
+    }
+
+    const GraphSettings = GetGraphSettingsLine(
+      lineType,
+      dataAVG,
+      graph.timeFrame
+    );
+    if (GraphSettings) {
       setOptions(GraphSettings.options);
       setLabels(GraphSettings.labels);
       setChartData(GraphSettings.chartData);

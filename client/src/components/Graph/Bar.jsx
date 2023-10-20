@@ -35,17 +35,26 @@ export function BarGraph(props) {
   const [chartData, setChartData] = useState({});
 
   useEffect(() => {
-    if (props.data && timeFrame && barType) {
+    if (props.data && barType) {
       const dataAVG = getAverage(props.data, timeFrame);
       const info = GetOverallAverage(dataAVG, barType);
-      const GraphSettings = GetGraphSettings(barType, dataAVG);
-      if (GraphSettings) {
+      if (barType !== "Level") {
         setGraph({
           ...graph,
           avg: info.average,
           max: info.max,
           min: info.min,
         });
+      } else {
+        setGraph({
+          ...graph,
+          avg: info.avgLevel,
+          max: info.levelMax,
+          min: info.levelMin,
+        });
+      }
+      const GraphSettings = GetGraphSettings(barType, dataAVG, graph.timeFrame);
+      if (GraphSettings) {
         setOptions(GraphSettings.options);
         setLabels(GraphSettings.labels);
         setChartData(GraphSettings.chartData);

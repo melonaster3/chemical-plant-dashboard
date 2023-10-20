@@ -27,9 +27,10 @@ export const TableContent = (props) => {
       />
       <DataType graph={props.graph} setGraph={props.setGraph} />
       <GraphType graph={props.graph} setGraph={props.setGraph} />
-      <TimeAvg graph={props.graph} setGraph={props.setGraph} />
 
       <TimeWindow graph={props.graph} setGraph={props.setGraph} />
+      <TimeAvg graph={props.graph} setGraph={props.setGraph} />
+
       <CSVExport
         graph={props.graph}
         data={props.data}

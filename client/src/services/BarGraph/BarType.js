@@ -2,31 +2,8 @@ import { timestampToReadableDate } from "../Time/time";
 import { enUS } from 'date-fns/locale';
 import 'chartjs-adapter-date-fns';
 
-export function GetGraphSettings(type, plotData) {
+export function GetGraphSettings(type, plotData,avgType) {
   
-function average(ctx) {
-  const values = ctx.chart.data.datasets[0].data;
-  return values.reduce((a, b) => a + b, 0) / values.length;
-}
-function average(ctx) {
-  const values = ctx.chart.data.datasets[0].data;
-  return values.reduce((a, b) => a + b, 0) / values.length;
-}
-  const annotation = {
-    type: 'line',
-    borderColor: 'white',
-    borderDash: [6, 6],
-    borderDashOffset: 0,
-    borderWidth: 3,
-    label: {
-      enabled: true,
-      content: (ctx) => 'Average: ' + average(ctx).toFixed(2),
-      position: 'end'
-    },
-    scaleID: 'y',
-    value: (ctx) => average(ctx)
-  };
-
   const commonOptions = {
     responsive: true,
     plugins: {
@@ -40,7 +17,7 @@ function average(ctx) {
       }, */
       title: {
         display: true,
-        text: "Chart.js Bar Chart",
+        text: "Plant Bar Chart",
       },
       tooltip: {
         callbacks: {
@@ -68,24 +45,18 @@ function average(ctx) {
     },
   },
     scales: {
-    x: {
-          
-            stacked: type === "Level" ? true : false,
-            title: {
-              display: true,
-              text: `
-            Time
-              `,
-              font: {
-                size: 14,
-                weight: 'bold',
-              },
-            },
-            grid: {
-              color: 'rgba(192, 192, 192, 0.3)', 
-            },
-          
-          },
+      x: {
+        offset: true,
+        ticks: {
+          maxTicksLimit: 10
+        },
+              grid: {
+          color: 'rgba(192, 192, 192, 0.3)',
+        },
+/*         stacked: type === "Level" ? true : false,
+ */        
+      },
+  
       y: {
         title: {
           display: true,
@@ -126,10 +97,20 @@ function average(ctx) {
       },
     },
   };
-  const labels = plotData.map((data2) => {
-    return data2.label
-  });
-
+  let labels
+  if (avgType === "") {
+    labels= plotData.map((data2,index) => {
+      let dateSet = new Date(data2.timestamp);
+      const localeOptionsDay = { year: 'numeric', month: '2-digit', day: '2-digit', };
+  
+      return  dateSet.toLocaleDateString(undefined, localeOptionsDay) 
+    });
+  } else {
+    labels= plotData.map((data2,index) => {
+    
+      return data2.label
+    });
+  }
   let datasets = [];
   if (type === "Level") {
     // For "Level" type, create two datasets for Level1 and Level2

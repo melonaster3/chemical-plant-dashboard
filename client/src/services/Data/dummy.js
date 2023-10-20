@@ -108,6 +108,17 @@ export const dummyDatasets = [
     let average = 0
     let typeKey = ''
     let unit = ''
+    let levelMin = {
+      level1: 0,
+      level2:0,
+    }
+    let levelMax = {
+      Level1 : 0,
+      Level2: 0
+    }
+    let avgLevel = { Level1 : 0,
+      Level2: 0
+    };
     if(type === "Temperature") {
       unit = '°C'
       typeKey = 'temperature'
@@ -123,15 +134,32 @@ export const dummyDatasets = [
       if(typeKey === "levels") {
         if(x === 0) {
           min = arrayOfData[x]["level1_chemical"] +arrayOfData[x]["level2_chemical"]
-
+          levelMin["Level1"]= arrayOfData[x]["level1_chemical"] 
+          levelMin["Level2"]= arrayOfData[x]["level2_chemical"] 
         }
         if(arrayOfData[x]["level1_chemical"] +arrayOfData[x]["level2_chemical"] > max) {
           max = arrayOfData[x]["level1_chemical"] +arrayOfData[x]["level2_chemical"]
         }
+        if(arrayOfData[x]["level1_chemical"] < levelMin.Level1) {
+          levelMin["Level1"]= arrayOfData[x]["level1_chemical"] 
+
+        }
+        if(arrayOfData[x]["level2_chemical"] < levelMin.Level2) {
+          levelMin["Level2"]= arrayOfData[x]["level2_chemical"] 
+        }
         if(arrayOfData[x]["level1_chemical"] +arrayOfData[x]["level2_chemical"] < min) {
           min = arrayOfData[x]["level1_chemical"] +arrayOfData[x]["level2_chemical"]
         }
-    
+
+        if(arrayOfData[x]["level1_chemical"] > levelMax.Level1) {
+          levelMax["Level1"]= arrayOfData[x]["level1_chemical"] 
+
+        }
+        if(arrayOfData[x]["level2_chemical"] > levelMax.Level2) {
+          levelMax["Level2"]= arrayOfData[x]["level2_chemical"] 
+        }
+        avgLevel["Level1"] += arrayOfData[x]["level1_chemical"]
+        avgLevel["Level2"] +=arrayOfData[x]["level2_chemical"] 
         average += arrayOfData[x]["level1_chemical"] +arrayOfData[x]["level2_chemical"] 
       } else {
         if(x === 0) {
@@ -146,9 +174,15 @@ export const dummyDatasets = [
         average += arrayOfData[x][typeKey]
       }
     }    
-    average = average/arrayOfData.length;
-    
+
+    if(typeKey === "levels") {
+      avgLevel["Level1"] =   avgLevel["Level1"]/arrayOfData.length;
+      avgLevel["Level2"] =   avgLevel["Level2"]/arrayOfData.length;
+
+    } else {
+      average = average/arrayOfData.length;
+    }
 
    
-    return {max, min, average}
+    return {max, min, average,levelMin,levelMax,avgLevel}
   }
