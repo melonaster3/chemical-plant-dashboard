@@ -69,8 +69,6 @@ On the bottom, the average, max and min value of each components will be shown w
 
 ![MainPage](https://github.com/melonaster3/chemical-plant-dashboard/blob/new-main/client/public/simacro.png?raw=true)
 
-![MainPage2](https://github.com/melonaster3/chemical-plant-dashboard/assets/101602590/0d2a000b-6ede-4015-a55f-0c9b296a8165)
-
 ## Dependencies
 
 - chartjs-adapter-date-fns ^3.0.0
