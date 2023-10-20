@@ -19,9 +19,9 @@ export const DataType = (props) => {
         item
         container
       >
-        {type.map((types) => {
+        {type.map((types, index) => {
           return (
-            <Grid xs={3} item container>
+            <Grid xs={3} key={index} item container>
               {graph.info === types ? (
                 <SelectedTypeButton
                   onClick={() =>

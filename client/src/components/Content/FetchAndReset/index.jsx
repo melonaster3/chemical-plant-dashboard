@@ -20,11 +20,7 @@ export const FetchAndReset = (props) => {
         marginBottom="2rem"
       >
         <Grid xs={3} item container>
-          {
-            {
-              /* Button will fetch current new data */
-            }
-          }
+          {/* Button will fetch current new data */}
           <FetchButton onClick={handleButtonClick}>Fetch Data</FetchButton>
         </Grid>
         <Grid xs={3} item container>

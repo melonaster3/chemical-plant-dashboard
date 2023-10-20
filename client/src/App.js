@@ -1,6 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Graph from "./components/index";
+import { Grid } from "@mui/material";
+
 import { ThemeProvider, createTheme, styled, useTheme } from '@mui/material/styles';
 function App() {
 
@@ -67,14 +69,26 @@ function App() {
  height : 10rem;
  width : 10rem;
 `;
-
+  const H1 = styled("h1")`
+  @media (max-width: 570px) {
+    font-size : 2rem;}
+`;
  return (
   <ThemeProvider theme={appTheme}>
     <div className="App">
       <header className="App-header">
-              <Logo src={"/simacro.svg"}/> 
+        <Grid fullWidth container>
+          <Grid xs={12} item container>
+            <Grid xl={4} lg ={4} md={3} sm ={3} xs={3} item container>          <Logo src={"/simacro.svg"}/> 
+</Grid>
+            <Grid xs={9} md={8} item container>
+            <H1 style={{ color: appTheme.palette.primary.main }}>Chemical Dashboard</H1>
 
-        <h1 style={{ color: appTheme.palette.primary.main }}>Chemical Dashboard</h1>
+            </Grid>
+
+          </Grid>
+        </Grid>
+
         <Graph />
       </header>
     </div>

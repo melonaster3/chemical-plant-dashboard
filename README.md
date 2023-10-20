@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# Real-time Chemical Plant Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The Real-time Chemical Plant Dashboard is a web application built with React.js for the frontend and Node.js for the backend. It provides a user-friendly interface for monitoring and visualizing real-time data from a virtual chemical plant. The project includes various features and components for data visualization and interaction.
 
-## Available Scripts
+## Built with
 
-In the project directory, you can run:
+- Javascript
+- React
+- Chart.js
+- Node.js
+- Express.js
+- PostgreSQL
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
+2. Update the .env file with your correct local information
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- username: `labber`
+- password: `labber`
+- database: `mydb`
 
-### `npm test`
+3. Install dependencies: `npm run install:dependencies`
+4. Fix to build: `build:client`
+5. Reset database: Database is reset and created after server runs
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Check the db folder to see what gets created, check /server/db/dummyData/generateData function and change to likings
 
-### `npm run build`
+7. Run the application: `npm run start:dev`
+8. Visit `http://localhost:3000/`
+9. Visit `http://localhost:3001/api` to see backend data
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Functionality
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Main Page
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The Main page is very simple for all users to use. It consists of the chart/graph for users to use on the right side, and a series of buttons for users to use to modify what is showin in the chart
 
-### `npm run eject`
+#### Yellow Buttons
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The first set of Yellow Buttons ae used to either Fetch the latest data, or to reset the options. Data fetching is done every 5 minutes, but if user wants to see or check the latest data, they can click on it.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Purple Buttons
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The set of Purple Buttons are to set what type of graph the user wants to see. Temperature, Pressure, Levels and All, with each button respectively showing what they should, but with Level, both Level of 1 and 2 are shown. User can click on the heading label at the top to remove one of the level and see the other level more clearly. All will show all values on the time range.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Pink Buttons
 
-## Learn More
+The pink buttons determine which type of graph user would like to see.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Time Range Green Buttons
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The start time and end time are time ranges for users to manually input and check the data of. The green buttons will automatically set the last hour, day, week, and month prior to the time as of now.
 
-### Code Splitting
+#### Dark Green Buttons
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The set of Dark Green Buttons will give the avereage of hourly, daily, weekly, monthly of what the time is right now. Reseting will go back to the chart showing the entire data set
 
-### Analyzing the Bundle Size
+#### Purple Buttons
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The Purple buttons will allow users to export the data in to a xlsx file. Graph data button will export what is currently on the graph, and full data will export the entire data sheet
 
-### Making a Progressive Web App
+### Further Data
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+On the bottom, the average, max and min value of each components will be shown with data on the graph.
 
-### Advanced Configuration
+## Dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- chartjs-adapter-date-fns ^3.0.0
+- luxon ^3.4.3
+- xlsx ^0.18.5
+- @mui/material ^5.14.14
+- axios ^1.5.1
+- chart.js ^4.4.0
+- react ^18.2.0
+- react-chartjs-2 ^5.2.0
+- cors ^2.8.5
+- dotenv ^16.3.1
+- express ^4.18.2
+- pg ^8.11.3
 
-### Deployment
+## Development and contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Feel free to send pull requests and raise issues.
 
-### `npm run build` fails to minify
+## Acknowledgements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Sang Lee, Main Developer

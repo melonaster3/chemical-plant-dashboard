@@ -15,7 +15,6 @@ font-weight : bold;
   }
 `;
 
-
 export const PressureButton = styled(Button)`
 background-color : #785580;
 &:hover {

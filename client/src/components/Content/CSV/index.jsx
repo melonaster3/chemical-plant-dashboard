@@ -1,16 +1,9 @@
 import { Grid } from "@mui/material";
-import {
-  AverageValueInfo,
-  SelectedButton,
-  SelectedTypeButton,
-  TypeButton,
-} from "../../style/style";
+import { AverageValueInfo, SelectedTypeButton } from "../../style/style";
 import * as XLSX from "xlsx";
-import { useState } from "react";
 
 export const CSVExport = (props) => {
   const graph = props.graph;
-  const [csv, setCSV] = useState("");
 
   // Define a function to export data to Excel based on the 'type' argument
   const exportToExcel = (type) => {
@@ -52,21 +45,22 @@ export const CSVExport = (props) => {
         rowSpaing={1}
         marginBottom="2rem"
         columnSpacing={1}
+        s
         item
         container
       >
         <Grid xs={12} item container>
-          <AverageValueInfo>Excel Data</AverageValueInfo> // Display a label for
-          the Excel data
+          <AverageValueInfo>Excel Data</AverageValueInfo>{" "}
+          {/* // Display a label for the Excel data*/}
         </Grid>
         <Grid xs={4} item container>
           <SelectedTypeButton onClick={() => exportToExcel("graph")}>
-            Graph Data // Button to export graph-specific data to Excel
+            Graph Data {/* // Button to export graph-specific data to Excel */}
           </SelectedTypeButton>
         </Grid>
         <Grid xs={4} item container>
           <SelectedTypeButton onClick={() => exportToExcel("all")}>
-            Full Data // Button to export all data to Excel
+            Full Data {/* // Button to export all data to Excel */}
           </SelectedTypeButton>
         </Grid>
       </Grid>

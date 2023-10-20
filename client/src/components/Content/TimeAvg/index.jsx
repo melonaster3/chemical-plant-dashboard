@@ -17,9 +17,9 @@ export const TimeAvg = (props) => {
         <Grid xs={12} item container>
           <AverageValueInfo>Average</AverageValueInfo>
         </Grid>
-        {type.map((types) => {
+        {type.map((types, index) => {
           return (
-            <Grid xs={3} item container marginBottom="2rem">
+            <Grid key={index} xs={3} item container marginBottom="2rem">
               {graph.timeFrame === types ? (
                 <SelectedTimeButton
                   onClick={() =>
