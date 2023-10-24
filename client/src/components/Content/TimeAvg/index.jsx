@@ -1,7 +1,6 @@
 import { Grid } from "@mui/material";
 import {
   AverageValueInfo,
-  SelectedButton,
   SelectedTimeButton,
   TimeButton,
 } from "../../style/style";

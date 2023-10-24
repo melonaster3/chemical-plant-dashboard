@@ -1,5 +1,3 @@
-import { timestampToReadableDate } from "../Time/time";
-import {de} from 'date-fns/locale';
 import "chartjs-adapter-date-fns";
 
 export function GetGraphSettingsLine(type, plotData, avgType) {
@@ -179,7 +177,7 @@ export function GetGraphSettingsLine(type, plotData, avgType) {
             return data2.level1_chemical;
           } else if (type === "Level2") {
             return data2.level2_chemical;
-          }
+          } else {return ''}
         }),
         backgroundColor: "rgba(255, 99, 132, 0.5",
         borderColor: 'rgba(192, 192, 192, 0.3)',

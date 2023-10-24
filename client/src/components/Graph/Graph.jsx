@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
 import LineGraph from "./Line";
 import { BarGraph } from "./Bar";
 import { EmptyGraph } from "../../services/LineGraph/lineType";
 import { Line } from "react-chartjs-2";
-import { ScaleContent } from "./Scale";
 
 export function GraphContent(props) {
   const graph = props.graph;

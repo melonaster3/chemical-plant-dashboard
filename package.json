@@ -8,6 +8,7 @@
     "start:server": "cd server && node server.js",
     "start:dev": "concurrently \"npm run start:client\" \"npm run start:server\"",
     "build:client": "cd client && npm run build",
+    "build": "npm run build:client",
     "install:dependencies": "npm install && cd client && npm install && cd ../server && npm install"
   },
   "repository": {
@@ -24,9 +25,5 @@
     "concurrently": "^8.2.1"
   },
   "dependencies": {
-    "chartjs-adapter-date-fns": "^3.0.0",
-    "date-fns": "^2.30.0",
-    "luxon": "^3.4.3",
-    "xlsx": "^0.18.5"
   }
 }

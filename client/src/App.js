@@ -1,9 +1,8 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Graph from "./components/index";
 import { Grid } from "@mui/material";
 
-import { ThemeProvider, createTheme, styled, useTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme, styled,  } from '@mui/material/styles';
 function App() {
 
   // There for Material UI

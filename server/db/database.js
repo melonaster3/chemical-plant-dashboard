@@ -7,11 +7,7 @@ const { dummyDatasets, generateData } = require('./dummyData.js'); // Import the
 
 // Create a PostgreSQL database connection pool with configuration from environment variables
 const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD || "labber", // Use a default password if not provided
-  port: parseInt(process.env.DB_PORT),
+  connectionString: process.env.DATABASE_URL, // Use the DATABASE_URL environment variable
 });
 
 // Function to create tables

@@ -2,7 +2,6 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  BarElement,
   Title,
   Tooltip,
   Legend,
@@ -11,10 +10,10 @@ import {
   TimeScale,
 } from "chart.js";
 
-import { GetOverallAverage, dummyDatasets } from "../../services/Data/dummy";
+import { GetOverallAverage } from "../../services/Data/dummy";
 import "chartjs-adapter-date-fns";
-import { Bar, Line } from "react-chartjs-2";
-import React, { useEffect, useRef, useState } from "react";
+import { Line } from "react-chartjs-2";
+import React, { useEffect, useState } from "react";
 import { GetGraphSettingsLine } from "../../services/LineGraph/lineType";
 import { getAverage } from "../../services/Time/time";
 

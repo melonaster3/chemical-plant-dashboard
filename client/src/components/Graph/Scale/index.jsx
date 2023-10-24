@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
 import { Grid, Input } from "@mui/material";
 import { MaxMin } from "../../style/style";
 
 export function ScaleContent(props) {
   const graph = props.graph;
-  const data = props.data;
   const setGraph = props.setGraph;
   return (
     <>

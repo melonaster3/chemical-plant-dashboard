@@ -1,0 +1,34 @@
+version: "3" # Use version 3 or higher for compatibility
+
+services:
+  # Client (React.js)
+  client:
+    build:
+      context: ./client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+
+  # Server (Express.js and PostgreSQL)
+  server:
+    build:
+      context: ./server
+    ports:
+      - "3001:3001"
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_USER: labber
+      POSTGRES_PASSWORD: labber
+      POSTGRES_DB: mydb
+      DATABASE_URL: postgres://labber:labber@db:5432/mydb
+    depends_on:
+      - db
+
+  # PostgreSQL database
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: labber
+      POSTGRES_PASSWORD: labber
+      POSTGRES_DB: mydb

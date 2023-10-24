@@ -6,11 +6,7 @@ const { Pool } = require('pg'); // Import the Pool class from the pg library for
 
 // Database configuration for the routes file
 const pool = new Pool({
-  user: process.env.DB_USER, 
-  host: process.env.DB_HOST, 
-  database: process.env.DB_NAME, 
-  password: process.env.DB_PASSWORD || "labber", 
-  port: parseInt(process.env.DB_PORT), 
+  connectionString: process.env.DATABASE_URL, // Use the DATABASE_URL environment variable
 });
 
 // Define a route that handles HTTP GET requests to '/data'

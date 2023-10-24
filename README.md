@@ -79,6 +79,34 @@ On the bottom, the average, max and min value of each components will be shown w
 - express ^4.18.2
 - pg ^8.11.3
 
+### Explanation on Package
+
+For the required packages, React, Node.js and Git were technological requirements as well as Chart.Js for the project requirements. PostgreSQL DB was a recommended DB technology and was chosen for the reason of familiarity. React Chart Js was a package that was downloaded to pair with Chart.js.
+
+Express JS was also chosen for the same reason for familiarity as well as for the easy and simply useage of only one API endpoint. Pg gave easy access to the existing PostgreSQL, and xlsx was use for the simple creation of Excel files to export given.
+
+Axios was used for a more error fixing approach, as it is able to give errors and is easily useable compared to the normal "fetch" function.
+
+Finally, Material UI was installed and used to make and give the application a more modern and easy UI for users to use. Dark Theme reducecs strain on users eyes, making the chart be visible for a longer time.
+
+## Branch Organization
+
+new-main - Main Branch. Created for the usage of polishing and deploying for client to use
+
+features/notes - Branch used to create features of the application that is related to adding the Readme.md as well as to add code notes and polish the application.
+
+main - Old main branch, used for dev production.
+
+fix/Node_Module - Error handling that happened in Node_Module git merging. (Fixing mistakes)
+
+features/BarGraph - Branch used to create and edit all features that were handled for creating and editing the BAR Graph function that is part of Chart.js.
+
+features/LineGraph- Branch used to create and edit all features that were handled for creating and editing the LINE Graph function that is part of Chart.js.
+
+features/api - Branch used to create and edit all features that were handled for craeting and editing the backend api function (that used PostgreSQL and Express)
+
+features/MUI - Branch used to polish and tidy up the application
+
 ## Development and contributing
 
 Feel free to send pull requests and raise issues.

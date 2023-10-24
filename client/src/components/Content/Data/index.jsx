@@ -1,9 +1,5 @@
 import { Grid } from "@mui/material";
-import {
-  SelectedButton,
-  SelectedTypeButton,
-  TypeButton,
-} from "../../style/style";
+import { SelectedTypeButton, TypeButton } from "../../style/style";
 
 export const DataType = (props) => {
   const graph = props.graph;

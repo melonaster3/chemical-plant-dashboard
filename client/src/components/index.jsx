@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GetData } from "../services/APICall";
-import { Button, Grid, Input } from "@mui/material";
+import { Grid } from "@mui/material";
 import { TableContent } from "./Content";
 import { GraphContent } from "./Graph/Graph";
 import { GraphDiv, TableContentDiv } from "./style/style";
