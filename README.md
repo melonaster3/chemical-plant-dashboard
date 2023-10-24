@@ -13,16 +13,17 @@ The Real-time Chemical Plant Dashboard is a web application built with React.js 
 
 ## Getting Started
 
-### WINDOWS
+### Windows Set Up with Dockers
 
-1. Assuming Docker Desktop is present, open up the application and also open Command Prompt.
-2. Using command cd, go into the root folder of chemical-plant-dashboard, where the docker .yml file is located.
-3. Input docker <compose build> to build the application
-4. Input docker-compose up to run the application
-5. Visit `http://localhost:3000/`
-6. Visit `http://localhost:3001/api` to see backend data
+1. Download the Zip files and extract it.
+2. Assuming Docker Desktop is present, open up the application and also open Command Prompt.
+3. Using command cd, go into the root folder of chemical-plant-dashboard downloaded folder, where the docker-compose .yml file is located.
+4. Input docker <compose build> to build the application
+5. Input docker-compose up to run the application
+6. Visit `http://localhost:3000/`
+7. Visit `http://localhost:3001/api` to see backend data
 
-### DEV
+### Dev
 
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
 2. Update the .env file with your correct local information
