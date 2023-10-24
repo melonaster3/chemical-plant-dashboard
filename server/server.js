@@ -8,15 +8,25 @@ const cors = require('cors'); // Import the cors package, which helps with handl
 app.use(express.json()); // Middleware to parse incoming JSON data
 app.use(cors()); // Middleware to enable CORS for your server, allowing it to be accessed from other domains
 
+// added to re connect to db in case db is added later for Docker
+async function connectToDatabase() {
+  return createUserTable().catch((error) => {
+    console.error("Failed to connect to the database:", error.message);
+    // Retry the connection after a delay
+    return new Promise((resolve) => setTimeout(resolve, 2000)).then(
+      connectToDatabase
+    );
+  });
+}
+
 // Create tables
- createUserTable()
+connectToDatabase()
   .then(() => {
-    console.log('Dummy Data made');
+    console.log("Dummy Data made");
   })
   .catch((error) => {
-    console.error('Error creating tables:', error);
+    console.error("Error creating tables:", error);
   });
-
 
 // Start the server
 app.use('/api', require('./routes/index.js'));
