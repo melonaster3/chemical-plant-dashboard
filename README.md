@@ -13,6 +13,17 @@ The Real-time Chemical Plant Dashboard is a web application built with React.js 
 
 ## Getting Started
 
+### WINDOWS
+
+1. Assuming Docker Desktop is present, open up the application and also open Command Prompt.
+2. Using command cd, go into the root folder of chemical-plant-dashboard, where the docker .yml file is located.
+3. Input docker <compose build> to build the application
+4. Input docker-compose up to run the application
+5. Visit `http://localhost:3000/`
+6. Visit `http://localhost:3001/api` to see backend data
+
+### DEV
+
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
 2. Update the .env file with your correct local information
 
@@ -33,6 +44,8 @@ The Real-time Chemical Plant Dashboard is a web application built with React.js 
 ## Functionality
 
 ### Main Page
+
+![image](https://github.com/melonaster3/chemical-plant-dashboard/assets/101602590/925dadd4-c79c-4699-9fa4-144db1ab7901)
 
 The Main page is very simple for all users to use. It consists of the chart/graph for users to use on the right side, and a series of buttons for users to use to modify what is showin in the chart
 
@@ -64,6 +77,8 @@ The Purple buttons will allow users to export the data in to a xlsx file. Graph 
 
 On the bottom, the average, max and min value of each components will be shown with data on the graph.
 
+![MainPage](https://github.com/melonaster3/chemical-plant-dashboard/blob/new-main/client/public/simacro.png?raw=true)
+
 ## Dependencies
 
 - chartjs-adapter-date-fns ^3.0.0
@@ -91,21 +106,37 @@ Finally, Material UI was installed and used to make and give the application a m
 
 ## Branch Organization
 
-new-main - Main Branch. Created for the usage of polishing and deploying for client to use
+### new-main
 
-features/notes - Branch used to create features of the application that is related to adding the Readme.md as well as to add code notes and polish the application.
+Main Branch. Created for the usage of polishing and deploying for client to use
 
-main - Old main branch, used for dev production.
+### features/notes
 
-fix/Node_Module - Error handling that happened in Node_Module git merging. (Fixing mistakes)
+Branch used to create features of the application that is related to adding the Readme.md as well as to add code notes and polish the application.
 
-features/BarGraph - Branch used to create and edit all features that were handled for creating and editing the BAR Graph function that is part of Chart.js.
+### main
 
-features/LineGraph- Branch used to create and edit all features that were handled for creating and editing the LINE Graph function that is part of Chart.js.
+Old main branch, used for dev production.
 
-features/api - Branch used to create and edit all features that were handled for craeting and editing the backend api function (that used PostgreSQL and Express)
+### fix/Node_Module
 
-features/MUI - Branch used to polish and tidy up the application
+Error handling that happened in Node_Module git merging. (Fixing mistakes)
+
+### features/BarGraph
+
+Branch used to create and edit all features that were handled for creating and editing the BAR Graph function that is part of Chart.js.
+
+### features/LineGraph
+
+Branch used to create and edit all features that were handled for creating and editing the LINE Graph function that is part of Chart.js.
+
+### features/api
+
+Branch used to create and edit all features that were handled for craeting and editing the backend api function (that used PostgreSQL and Express)
+
+### features/MUI
+
+Branch used to polish and tidy up the application
 
 ## Development and contributing
 
