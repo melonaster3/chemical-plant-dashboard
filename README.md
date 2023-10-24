@@ -96,21 +96,29 @@ Finally, Material UI was installed and used to make and give the application a m
 
 ## Branch Organization
 
-### new-main - Main Branch. Created for the usage of polishing and deploying for client to use
+### new-main 
+Main Branch. Created for the usage of polishing and deploying for client to use
 
-### features/notes - Branch used to create features of the application that is related to adding the Readme.md as well as to add code notes and polish the application.
+### features/notes
+Branch used to create features of the application that is related to adding the Readme.md as well as to add code notes and polish the application.
 
-### main - Old main branch, used for dev production.
+### main 
+Old main branch, used for dev production.
 
-### fix/Node_Module - Error handling that happened in Node_Module git merging. (Fixing mistakes)
+### fix/Node_Module 
+Error handling that happened in Node_Module git merging. (Fixing mistakes)
 
-### features/BarGraph - Branch used to create and edit all features that were handled for creating and editing the BAR Graph function that is part of Chart.js.
+### features/BarGraph 
+Branch used to create and edit all features that were handled for creating and editing the BAR Graph function that is part of Chart.js.
 
-### features/LineGraph- Branch used to create and edit all features that were handled for creating and editing the LINE Graph function that is part of Chart.js.
+### features/LineGraph
+Branch used to create and edit all features that were handled for creating and editing the LINE Graph function that is part of Chart.js.
 
-### features/api - Branch used to create and edit all features that were handled for craeting and editing the backend api function (that used PostgreSQL and Express)
+### features/api 
+Branch used to create and edit all features that were handled for craeting and editing the backend api function (that used PostgreSQL and Express)
 
-### features/MUI - Branch used to polish and tidy up the application
+### features/MUI 
+Branch used to polish and tidy up the application
 
 ## Development and contributing
 
